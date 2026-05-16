@@ -291,6 +291,92 @@ background:var(--gold);
 box-shadow:0 0 20px var(--gold);
 }
 
+.roadmap{
+position:relative;
+margin-top:80px;
+padding:80px 0;
+}
+
+.road-line{
+position:absolute;
+left:50%;
+top:0;
+transform:translateX(-50%);
+width:8px;
+height:100%;
+background:linear-gradient(to bottom,#ff4d94,#8b5cf6,#ffd166);
+border-radius:20px;
+box-shadow:0 0 35px rgba(255,77,148,0.6);
+}
+
+.road-stop{
+position:relative;
+width:100%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin:90px 0;
+}
+
+.road-stop:nth-child(even){
+flex-direction:row-reverse;
+}
+
+.road-card{
+width:42%;
+background:rgba(255,255,255,0.08);
+padding:35px;
+border-radius:30px;
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 10px 45px rgba(0,0,0,0.35);
+transition:0.5s;
+}
+
+.road-card:hover{
+transform:translateY(-10px) scale(1.02);
+box-shadow:0 0 45px rgba(255,77,148,0.35);
+}
+
+.road-dot{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+width:32px;
+height:32px;
+border-radius:50%;
+background:linear-gradient(135deg,#ffd166,#ff4d94);
+box-shadow:0 0 35px rgba(255,209,102,0.9);
+z-index:5;
+border:4px solid rgba(255,255,255,0.15);
+}
+
+.road-emoji{
+font-size:2.2rem;
+margin-bottom:15px;
+}
+
+@media(max-width:768px){
+.road-line{
+left:20px;
+}
+
+.road-stop,
+.road-stop:nth-child(even){
+flex-direction:column;
+align-items:flex-start;
+padding-left:55px;
+}
+
+.road-dot{
+left:20px;
+}
+
+.road-card{
+width:100%;
+}
+}
+
 .flip-card{
 perspective:1000px;
 height:260px;
@@ -463,10 +549,7 @@ font-size:1rem;
 
 <section class="hero">
 <h1>Happy Birthday My Love ❤️</h1>
-<p>
-Mana story oka normal relationship kaadhu… cinematic journey.
-From first selfie to future dreams, every memory became part of mana forever story.
-</p>
+
 
 <div class="countdown">
 <div class="count-box"><h2 id="days">00</h2><span>Days</span></div>
@@ -486,16 +569,113 @@ Start Our Journey ❤️
 <h2 class="section-title">Our First Day ✨</h2>
 <div class="timeline">
 <div class="timeline-item card">
-<h3>🛕 Arunachalam • Nov 30 • 9:20 AM</h3>
-<p>Mana journey ikkade start ayyindi. U hold my hand first time ❤️</p>
+<h3>📸 Aug 30 • First Group Selfie</h3>
+<p>
+Our first group selfie together ❤️
+One simple photo… but the beginning of countless memories ✨
+</p>
 </div>
+
 <div class="timeline-item card">
-<h3>📸 First Selfie</h3>
-<p>One photo… infinite memories.</p>
+<h3>💬 Sep 26 • Our First Day</h3>
+<p>Mana story first chatting tho start ayyindi ❤️</p>
 </div>
+
+<div class="timeline-item card">
+<h3>🎀 11th October • First Gift</h3>
+<p>
+The first gift I purchased for mommy was a cute rabbit headband ❤️
+One small gift… but a very special memory forever ✨
+</p>
+</div>
+
+
+
+<div class="timeline-item card">
+<h3>📸 Dec 1 • First Selfie</h3>
+<p>
+One photo… infinite memories ❤️<br>
+That was also the first time nenu neku jaga veyadam ✨
+</p>
+</div>
+
+
 <div class="timeline-item card">
 <h3>💖 First Touch • Nov 29</h3>
 <p>Small moment but life long feeling.</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🏍️ Dec 1 • First Bike Ride</h3>
+<p>
+Mana first bike ride together ❤️
+Road kanna journey important ayindi.
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🌊 Dec 1 • First Time I Feed You</h3>
+<p>
+At the beach, for the first time I fed you with my own hands ❤️
+One soft peaceful moment that became forever special ✨
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🌊 Our First Beach • Rock Beach</h3>
+<p>
+Rock Beach became one of our most peaceful and beautiful memories ❤️
+Waves, hugs, emotions, and forever moments together ✨
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🍫 Dec 24 • First Chocolate Together</h3>
+<p>
+Our first chocolate together was Snickers ❤️
+Small chocolate… but one unforgettable sweet memory ✨
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🍜 Feb 25 • First Time You Cooked For Me</h3>
+<p>
+The first food mommy cooked for me was Yippee ❤️
+One simple meal… but filled with love and comfort ✨
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🥻 21st March • First Saree Gift</h3>
+<p>
+The first saree I bought for mommy was on 21st March ❤️
+One beautiful traditional memory that became forever special ✨
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🤝 Feb 15 • First Time Meeting Bava</h3>
+<p>
+Feb 15 was the first time I met bava ❤️
+One important memory in our journey together ✨
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>❤️ Feb 17 • Our Valentine Day</h3>
+<p>
+For others Valentine’s Day is Feb 14…
+but for us, our real Valentine’s Day is Feb 17 ❤️
+Our first physical meetup became one unforgettable emotional memory ✨
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>😤 Jan 5 • First Time Nenu Jada</h3>
+<p>
+That was the first time nenu seriously jada ❤️
+Even that feeling became part of our emotional love story ✨
+</p>
 </div>
 </div>
 </section>
@@ -561,10 +741,12 @@ alt="Rock Beach">
 <section id="hug" class="reveal">
 <h2 class="section-title">Our First Hug 🤍</h2>
 <div class="card">
-<h3>Pondi Forever Memory</h3>
+<h3>🤍 Dec 1 • First Hug</h3>
 <p>
-First hug… first comfort… first time feeling like home.
-Heartbeat la unde moment ❤️
+I was feeling very sad that day…
+then mommy hugged me ❤️
+That hug felt like peace, comfort, and home together.
+One of the most beautiful feelings in my life ✨
 </p>
 </div>
 </section>
@@ -572,39 +754,263 @@ Heartbeat la unde moment ❤️
 <section id="kiss" class="reveal">
 <h2 class="section-title">Our First Kiss 💋</h2>
 <div class="card">
-<h3>Dreamy Night In Pondi</h3>
+<h3>🛕 Nov 30 Night • Arunachalam</h3>
 <p>
-Stars, silence, beach wind and mana first kiss.
-One cinematic forever memory ✨
+The day she touched me… I kissed her hands softly ❤️
+We stayed close, touched each other, and mommy gently massaged my hair.
+That night in Arunachalam felt emotional, peaceful, and unforgettable ✨
+Our first kiss became one of the most beautiful memories in our love story.
 </p>
 </div>
 </section>
 
 <section id="trip" class="reveal">
-<h2 class="section-title">Our Trips Together 🌍</h2>
-<div class="grid">
-<div class="card"><h3>🌊 Rock Beach</h3><p>Waves, hugs, peace and forever memories.</p></div>
-<div class="card"><h3>🏍️ First Bike Drive • Dec 1</h3><p>Freedom and happiness together.</p></div>
-<div class="card"><h3>👕 April 5 • Mommy First Shirt Gift</h3><p>Nellore second trip forever special ❤️</p></div>
+<h2 class="section-title">Our Love Roadmap 🌍</h2>
+
+<div class="roadmap">
+<div class="road-line"></div>
+
+<div class="road-stop">
+<div class="road-card">
+<div class="road-emoji">🛕</div>
+<h3>First Trip • Arunachalam</h3>
+<p>
+Nov 30 • 9:20 AM ❤️<br>
+Mana journey officially started when u held my hand.
+Our first touch, first kiss, first emotions started here ✨
+</p>
+</div>
+<div class="road-dot"></div>
+<div style="width:42%"></div>
+</div>
+
+<div class="road-stop">
+<div class="road-card">
+<div class="road-emoji">🌊</div>
+<h3>Second Trip • Pondicherry</h3>
+<p>
+Dec 1 ❤️<br>
+Mommy hugged me when I was feeling sad.
+That first hug felt magical and unforgettable ✨<br>
+Rock Beach memories ❤️<br>
+Future lo malli velthey same room kavali.
+</p>
+</div>
+<div class="road-dot"></div>
+<div style="width:42%"></div>
+</div>
+
+<div class="road-stop">
+<div class="road-card">
+<div class="road-emoji">👕</div>
+<h3>Third Trip • Nellore</h3>
+<p>
+April 5 ❤️<br>
+Mana second journey together.
+Mommy naa kosam first shirt konnindi.
+One unforgettable beautiful day ✨
+</p>
+</div>
+<div class="road-dot"></div>
+<div style="width:42%"></div>
+</div>
+
 </div>
 </section>
 
 <section id="journey" class="reveal">
 <h2 class="section-title">Mana Journey Together 💞</h2>
 <div class="timeline">
-<div class="timeline-item card"><h3>🍫 First Chocolate</h3><p>Snickers became special because of you.</p></div>
-<div class="timeline-item card"><h3>🌸 First Lotus Flower • March 12</h3><p>Small flower… huge emotion.</p></div>
-<div class="timeline-item card"><h3>💃 First Dance • April 18</h3><p>Felt like movie scene.</p></div>
-<div class="timeline-item card"><h3>💍 March 24 • Mommy Proposed</h3><p>Most emotional day in my life.</p></div>
+
+<div class="timeline-item card">
+<h3>💬 Sep 26 • First Chat</h3>
+<p>
+Mana story normal relationship kaadhu…
+first message nunchi emotional cinematic journey start ayyindi ❤️
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🛕 Arunachalam • Nov 30 • 9:20 AM</h3>
+<p>
+Our journey officially started when u held my hand.
+Aa moment nunchi life motham maripoyindi ✨
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>📸 Aug 30 • First Group Selfie</h3>
+<p>
+Before everything became magical…
+we captured our first group selfie together ❤️
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>📸 Dec 1 • Our First Selfie</h3>
+<p>
+One selfie… infinite emotions ❤️
+Mana first photo always stays special forever.
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🤍 Nov 29 & Nov 30 • First Touch & First Kiss</h3>
+<p>
+Our first touch started on Nov 29 ❤️
+On Nov 30 night in Arunachalam, we kissed each other, stayed close, and mommy softly massaged my hair ✨
+One emotional cinematic memory that will stay forever.
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🌊 Pondi & Rock Beach Memories</h3>
+<p>
+Our first hug, first kiss, first emotional comfort happened in Pondi ❤️
+Rock Beach became our forever peaceful place.
+Future lo malli Pondi velthey same room kavali ✨
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🍫 First Chocolate • Snickers</h3>
+<p>
+Mana first chocolate together was Snickers ❤️
+Small thing… but unforgettable memory.
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🏍️ Dec 1 • First Bike Ride</h3>
+<p>
+Mana first bike drive together ❤️
+Road kanna journey important ayindi.
+Nuvvu pakkana unte every ride beautiful ✨
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🌸 March 12 • First Lotus Flower</h3>
+<p>
+My first flower I gave to mommy was a lotus on March 12 ❤️
+One simple flower… but one unforgettable emotional memory ✨
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🥻 21st March • First Saree Gift</h3>
+<p>
+The first saree I bought for mommy was on 21st March ❤️
+One beautiful traditional memory that became forever special ✨
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>💍 March 24 • Proposal Day</h3>
+<p>
+Signature day lo mommy propose chesindi.
+Full emotions, tears, happiness, fear… everything together ❤️
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>👕 April 5 • Second Trip • First Shirt Gift</h3>
+<p>
+Mana second trip Nellore lo mommy naa kosam first shirt konnindi ❤️
+Public lo happiness chupinchalekapoya kani aa memory forever.
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>💃 18th April • Our First Dance</h3>
+<p>
+Movie scene la feel ayyindi ❤️
+Dance kanna aa moment beautiful and unforgettable ✨
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>😔 Worst Day • Jan 27</h3>
+<p>
+Jan 27 was my worst emotional day ❤️
+But every misunderstanding made us stronger together forever ✨
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🫂 Promises</h3>
+<p>
+Problems vachina room dhaati bayataki vellakudadhu.
+Everything share chesukovali.
+Life long pakkane undali ❤️
+</p>
+</div>
+
+<div class="timeline-item card">
+<h3>🌌 Chapter 2026</h3>
+<p>
+2026 mana future foundation.
+Strong jobs, peaceful beginning, marriage dreams, stable life.
+Kalisi build cheyyali mana future ✨
+</p>
+</div>
+
 </div>
 </section>
 
 <section id="future" class="reveal">
 <h2 class="section-title">Future Plans Together 🌌</h2>
 <div class="grid">
-<div class="card"><h3>🏠 Dream Home</h3><p>Peaceful life together.</p></div>
-<div class="card"><h3>✈️ Future Trips</h3><p>More beaches, temples and memories.</p></div>
-<div class="card"><h3>💍 Marriage Dreams</h3><p>Forever journey together.</p></div>
+
+<div class="card">
+<h3>🏠 Dream Home</h3>
+<p>
+Nuvvu naaku home feeling.
+One peaceful house, midnight talks, happy life together ❤️
+</p>
+</div>
+
+<div class="card">
+<h3>🛕 Arunachalam Again</h3>
+<p>
+Again Arunachalam ke kalisi povali ❤️<br>
+Job vachaka… settle ayyaka…<br>
+marriage tarvatha same temple lo malli memories create cheyyali ✨
+</p>
+</div>
+
+<div class="card">
+<h3>🌊 Pondi Forever</h3>
+<p>
+Future lo Pondicherry velthey same room kavali.
+Same memories… new chapter ❤️
+</p>
+</div>
+
+<div class="card">
+<h3>💍 Marriage Dreams</h3>
+<p>
+Girlfriend kaadhu mommy…
+nuvvu naa life partner journey lo first step ❤️
+</p>
+</div>
+
+<div class="card">
+<h3>✈️ Future Trips</h3>
+<p>
+More beaches, more rides, more hugs,
+more forever memories together ✨
+</p>
+</div>
+
+<div class="card">
+<h3>🌠 Forever Promise</h3>
+<p>
+Nimishaniki okasari I love you cheppadaniki kaadhu…
+life long aa maata meeda nilabadataniki ❤️
+</p>
+</div>
+
 </div>
 </section>
 
@@ -718,8 +1124,11 @@ setTimeout(()=>heart.remove(),4500);
 const quotes=[
 'You are my favorite chapter ❤️',
 'Mana story forever cinematic ✨',
-'Every memory with you feels magical 💖',
-'You are my peace, my happiness, my home ❤️'
+'Nuvvu na medicine… neku nenu addiction 💖',
+'You became my home feeling ❤️',
+'2026 mana future foundation ✨',
+'Every worst day tarvatha malli okati ayyam ❤️',
+'Forever with you mommy 🌙'
 ];
 let q=0;
 setInterval(()=>{
