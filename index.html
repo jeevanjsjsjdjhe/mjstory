@@ -418,17 +418,6 @@ min-width:100px;
 backdrop-filter:blur(10px);
 }
 
-.upload-spinner{
-display:none;
-color:#ffd6e8;
-margin-top:10px;
-text-align:center;
-}
-
-.upload-spinner.show{
-display:block;
-}
-
 @media(max-width:768px){
 .chapter-nav{
 bottom:15px;
@@ -513,32 +502,51 @@ Start Our Journey ❤️
 
 <section id="selfie" class="reveal">
 <h2 class="section-title">Our First Selfie 📸</h2>
+
 <div class="grid">
 
 <div class="polaroid">
-<input type="file" accept="image/*" id="uploadSelfie" hidden onchange="uploadImage(event,'selfiePreview')">
-<div class="photo-placeholder" onclick="document.getElementById('uploadSelfie').click()">
-<img id="selfiePreview" src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200&auto=format&fit=crop" alt="First Selfie">
-<div class="upload-text">❤️ Upload Your First Selfie</div>
-<div class="upload-spinner" id="selfieSpinner">Uploading... ⏳</div>
+<div class="photo-placeholder" onclick="openViewer('https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/first-selfie.jpg')">
+
+<img
+id="selfiePreview"
+src="https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/first-selfie.jpg"
+alt="First Selfie">
+
+<div class="upload-text">
+❤️ Our First Selfie
+</div>
+
 </div>
 </div>
 
 <div class="polaroid">
-<input type="file" accept="image/*" id="uploadPondi" hidden onchange="uploadImage(event,'pondiPreview')">
-<div class="photo-placeholder" onclick="document.getElementById('uploadPondi').click()">
-<img id="pondiPreview" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop" alt="Pondi Memory">
-<div class="upload-text">🌊 Upload Pondi Memory</div>
-<div class="upload-spinner" id="pondiSpinner">Uploading... ⏳</div>
+<div class="photo-placeholder" onclick="openViewer('https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/pondi-memory.jpg')">
+
+<img
+id="pondiPreview"
+src="https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/pondi-memory.jpg"
+alt="Pondi Memory">
+
+<div class="upload-text">
+🌊 Pondi Memory
+</div>
+
 </div>
 </div>
 
 <div class="polaroid">
-<input type="file" accept="image/*" id="uploadBeach" hidden onchange="uploadImage(event,'beachPreview')">
-<div class="photo-placeholder" onclick="document.getElementById('uploadBeach').click()">
-<img id="beachPreview" src="https://images.unsplash.com/photo-1495567720989-cebdbdd97913?q=80&w=1200&auto=format&fit=crop" alt="Rock Beach">
-<div class="upload-text">✨ Upload Rock Beach Memory</div>
-<div class="upload-spinner" id="beachSpinner">Uploading... ⏳</div>
+<div class="photo-placeholder" onclick="openViewer('https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/rock-beach.jpg')">
+
+<img
+id="beachPreview"
+src="https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/rock-beach.jpg"
+alt="Rock Beach">
+
+<div class="upload-text">
+✨ Rock Beach
+</div>
+
 </div>
 </div>
 
@@ -644,160 +652,7 @@ I will always choose you.
 </p>
 </footer>
 
-<!-- Firebase CDN - Modular SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js"></script>
-
-<script type="module">
-// ============================================
-// FIREBASE CONFIGURATION - LIVE CREDENTIALS
-// ============================================
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js';
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCyfAOOebD4LDZ-Gd1mA_1L9sA7KDYW6BQ",
-  authDomain: "mjstory-57c2b.firebaseapp.com",
-  projectId: "mjstory-57c2b",
-  storageBucket: "mjstory-57c2b.firebasestorage.app",
-  messagingSenderId: "1056930868287",
-  appId: "1:1056930868287:web:6a3fcff7dda6ed25581c8a"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const storage = getStorage(app);
-
-// Make functions globally available
-window.uploadImage = uploadImage;
-window.openViewer = openViewer;
-window.closeViewer = closeViewer;
-window.showSurprise = showSurprise;
-
-// ============================================
-// UPLOAD TO FIREBASE (PERMANENT ONLINE STORAGE)
-// ============================================
-async function uploadImage(event, previewId){
-const file = event.target.files[0];
-const spinnerId = previewId.replace('Preview', 'Spinner');
-const spinner = document.getElementById(spinnerId);
-
-if(!file){
-return;
-}
-
-// Show loading spinner
-spinner.classList.add('show');
-
-try{
-// Create a unique filename
-const timestamp = Date.now();
-const filename = `${previewId}_${timestamp}_${file.name}`;
-const storageRef = ref(storage, `memories/${filename}`);
-
-// Upload file to Firebase Storage
-const snapshot = await uploadBytes(storageRef, file);
-console.log('Upload successful:', snapshot);
-
-// Get permanent download URL
-const downloadURL = await getDownloadURL(snapshot.ref);
-
-// Update image preview
-const img = document.getElementById(previewId);
-img.src = downloadURL;
-
-// Save URL to localStorage as backup
-localStorage.setItem(previewId, downloadURL);
-
-// Also save to a master list in localStorage
-let savedImages = JSON.parse(localStorage.getItem('mjstory_images') || '{}');
-savedImages[previewId] = downloadURL;
-localStorage.setItem('mjstory_images', JSON.stringify(savedImages));
-
-// Update click handler to open image viewer
-img.parentElement.onclick = function(){
-openViewer(downloadURL);
-};
-
-// Update upload text
-const uploadText = img.parentElement.querySelector('.upload-text');
-if(uploadText){
-uploadText.innerHTML = '❤️ Memory Saved Permanently ✓';
-}
-
-// Hide spinner
-spinner.classList.remove('show');
-
-console.log('Image uploaded and saved permanently online!');
-console.log('Download URL:', downloadURL);
-
-}catch(error){
-console.error('Error uploading image:', error);
-spinner.classList.remove('show');
-alert('Error uploading image: ' + error.message);
-}
-}
-
-// ============================================
-// LOAD SAVED IMAGES FROM FIREBASE/LOCALSTORAGE
-// ============================================
-function loadSavedImages(){
-const imageIds = ['selfiePreview','pondiPreview','beachPreview'];
-
-// Check master list first
-const savedImages = JSON.parse(localStorage.getItem('mjstory_images') || '{}');
-
-imageIds.forEach(id=>{
-let savedURL = savedImages[id] || localStorage.getItem(id);
-
-if(savedURL){
-const img = document.getElementById(id);
-
-if(img){
-img.src = savedURL;
-
-// Update click handler
-img.parentElement.onclick = function(){
-openViewer(savedURL);
-};
-
-// Update upload text
-const uploadText = img.parentElement.querySelector('.upload-text');
-if(uploadText){
-uploadText.innerHTML = '❤️ Saved Memory';
-}
-
-console.log('Loaded saved image: ' + id);
-}
-}
-});
-}
-
-// Load saved images when page loads
-document.addEventListener('DOMContentLoaded', loadSavedImages);
-
-// ============================================
-// IMAGE VIEWER
-// ============================================
-function openViewer(src){
-document.getElementById('viewerImage').src = src;
-document.getElementById('imageViewer').style.display = 'flex';
-document.body.style.overflow = 'hidden';
-}
-
-function closeViewer(){
-document.getElementById('imageViewer').style.display = 'none';
-document.body.style.overflow = 'auto';
-}
-
-// Close viewer on ESC key
-document.addEventListener('keydown', (e) => {
-if(e.key === 'Escape') closeViewer();
-});
-
-// ============================================
-// MUSIC CONTROL
-// ============================================
+<script>
 const song = document.getElementById('loveSong');
 const musicBtn = document.getElementById('musicBtn');
 let playing = false;
@@ -827,9 +682,6 @@ toggleMusic();
 }
 },{once:true});
 
-// ============================================
-// SCROLL REVEAL ANIMATION
-// ============================================
 const revealItems = document.querySelectorAll('.reveal');
 function reveal(){
 revealItems.forEach(el=>{
@@ -842,10 +694,7 @@ el.classList.add('active');
 window.addEventListener('scroll',reveal);
 reveal();
 
-// ============================================
-// SURPRISE ANIMATION
-// ============================================
-window.showSurprise = function(){
+function showSurprise(){
 const box = document.getElementById('surpriseBox');
 box.style.display='block';
 for(let i=0;i<60;i++){
@@ -866,9 +715,6 @@ setTimeout(()=>heart.remove(),4500);
 }
 }
 
-// ============================================
-// QUOTES SLIDER
-// ============================================
 const quotes=[
 'You are my favorite chapter ❤️',
 'Mana story forever cinematic ✨',
@@ -881,9 +727,6 @@ document.getElementById('quoteSlider').innerHTML=quotes[q];
 q=(q+1)%quotes.length;
 },3000);
 
-// ============================================
-// COUNTDOWN TIMER
-// ============================================
 const targetDate = new Date('May 17, 2026 00:00:00').getTime();
 setInterval(()=>{
 const now = new Date().getTime();
@@ -899,9 +742,6 @@ document.getElementById('minutes').innerText=m;
 document.getElementById('seconds').innerText=s;
 },1000);
 
-// ============================================
-// BACKGROUND PARTICLES
-// ============================================
 const canvas=document.getElementById('bgCanvas');
 const ctx=canvas.getContext('2d');
 canvas.width=window.innerWidth;
@@ -939,9 +779,19 @@ canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 });
 
-// ============================================
-// BUTTERFLY ANIMATION
-// ============================================
+function openViewer(src){
+document.getElementById('viewerImage').src = src;
+document.getElementById('imageViewer').style.display = 'flex';
+document.body.style.overflow = 'hidden';
+}
+
+function closeViewer(){
+document.getElementById('imageViewer').style.display = 'none';
+document.body.style.overflow = 'auto';
+}
+
+
+
 const butterflyEmojis=['🦋','💖','✨'];
 
 document.addEventListener('click',(e)=>{
@@ -967,7 +817,6 @@ butterfly.remove();
 },4000);
 }
 });
-
 </script>
 </body>
 </html>
