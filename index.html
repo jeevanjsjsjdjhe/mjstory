@@ -502,51 +502,29 @@ Start Our Journey ❤️
 
 <section id="selfie" class="reveal">
 <h2 class="section-title">Our First Selfie 📸</h2>
-
 <div class="grid">
 
 <div class="polaroid">
-<div class="photo-placeholder" onclick="openViewer('https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/first-selfie.jpg')">
-
-<img
-id="selfiePreview"
-src="https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/first-selfie.jpg"
-alt="First Selfie">
-
-<div class="upload-text">
-❤️ Our First Selfie
-</div>
-
+<input type="file" accept="image/*" id="uploadSelfie" hidden onchange="uploadImage(event,'selfiePreview')">
+<div class="photo-placeholder" onclick="document.getElementById('uploadSelfie').click()">
+<img id="selfiePreview" src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200&auto=format&fit=crop" alt="First Selfie">
+<div class="upload-text">❤️ Upload Your First Selfie</div>
 </div>
 </div>
 
 <div class="polaroid">
-<div class="photo-placeholder" onclick="openViewer('https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/pondi-memory.jpg')">
-
-<img
-id="pondiPreview"
-src="https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/pondi-memory.jpg"
-alt="Pondi Memory">
-
-<div class="upload-text">
-🌊 Pondi Memory
-</div>
-
+<input type="file" accept="image/*" id="uploadPondi" hidden onchange="uploadImage(event,'pondiPreview')">
+<div class="photo-placeholder" onclick="document.getElementById('uploadPondi').click()">
+<img id="pondiPreview" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop" alt="Pondi Memory">
+<div class="upload-text">🌊 Upload Pondi Memory</div>
 </div>
 </div>
 
 <div class="polaroid">
-<div class="photo-placeholder" onclick="openViewer('https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/rock-beach.jpg')">
-
-<img
-id="beachPreview"
-src="https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/rock-beach.jpg"
-alt="Rock Beach">
-
-<div class="upload-text">
-✨ Rock Beach
-</div>
-
+<input type="file" accept="image/*" id="uploadBeach" hidden onchange="uploadImage(event,'beachPreview')">
+<div class="photo-placeholder" onclick="document.getElementById('uploadBeach').click()">
+<img id="beachPreview" src="https://images.unsplash.com/photo-1495567720989-cebdbdd97913?q=80&w=1200&auto=format&fit=crop" alt="Rock Beach">
+<div class="upload-text">✨ Upload Rock Beach Memory</div>
 </div>
 </div>
 
@@ -790,7 +768,71 @@ document.getElementById('imageViewer').style.display = 'none';
 document.body.style.overflow = 'auto';
 }
 
+function uploadImage(event, previewId){
+const file = event.target.files[0];
 
+if(file){
+const reader = new FileReader();
+
+reader.onload = function(e){
+const imageData = e.target.result;
+const img = document.getElementById(previewId);
+
+// Update image source
+img.src = imageData;
+
+// Save to localStorage
+localStorage.setItem(previewId, imageData);
+
+// Update click handler to open viewer
+img.parentElement.onclick = function(){
+openViewer(imageData);
+};
+
+// Update upload text
+const uploadText = img.parentElement.querySelector('.upload-text');
+if(uploadText){
+uploadText.innerHTML = '❤️ Memory Saved ✓';
+}
+
+console.log('Image saved: ' + previewId);
+};
+
+reader.readAsDataURL(file);
+}
+}
+
+function loadSavedImages(){
+const imageIds = ['selfiePreview','pondiPreview','beachPreview'];
+
+imageIds.forEach(id=>{
+const savedImage = localStorage.getItem(id);
+
+if(savedImage){
+const img = document.getElementById(id);
+
+if(img){
+img.src = savedImage;
+
+// Update click handler
+img.parentElement.onclick = function(){
+openViewer(savedImage);
+};
+
+// Update upload text
+const uploadText = img.parentElement.querySelector('.upload-text');
+if(uploadText){
+uploadText.innerHTML = '❤️ Saved Memory';
+}
+
+console.log('Loaded saved image: ' + id);
+}
+}
+});
+}
+
+// Load saved images when page loads
+document.addEventListener('DOMContentLoaded', loadSavedImages);
 
 const butterflyEmojis=['🦋','💖','✨'];
 
