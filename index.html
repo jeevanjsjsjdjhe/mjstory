@@ -418,6 +418,17 @@ min-width:100px;
 backdrop-filter:blur(10px);
 }
 
+.upload-spinner{
+display:none;
+color:#ffd6e8;
+margin-top:10px;
+text-align:center;
+}
+
+.upload-spinner.show{
+display:block;
+}
+
 @media(max-width:768px){
 .chapter-nav{
 bottom:15px;
@@ -509,6 +520,7 @@ Start Our Journey ❤️
 <div class="photo-placeholder" onclick="document.getElementById('uploadSelfie').click()">
 <img id="selfiePreview" src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200&auto=format&fit=crop" alt="First Selfie">
 <div class="upload-text">❤️ Upload Your First Selfie</div>
+<div class="upload-spinner" id="selfieSpinner">Uploading... ⏳</div>
 </div>
 </div>
 
@@ -517,6 +529,7 @@ Start Our Journey ❤️
 <div class="photo-placeholder" onclick="document.getElementById('uploadPondi').click()">
 <img id="pondiPreview" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop" alt="Pondi Memory">
 <div class="upload-text">🌊 Upload Pondi Memory</div>
+<div class="upload-spinner" id="pondiSpinner">Uploading... ⏳</div>
 </div>
 </div>
 
@@ -525,6 +538,7 @@ Start Our Journey ❤️
 <div class="photo-placeholder" onclick="document.getElementById('uploadBeach').click()">
 <img id="beachPreview" src="https://images.unsplash.com/photo-1495567720989-cebdbdd97913?q=80&w=1200&auto=format&fit=crop" alt="Rock Beach">
 <div class="upload-text">✨ Upload Rock Beach Memory</div>
+<div class="upload-spinner" id="beachSpinner">Uploading... ⏳</div>
 </div>
 </div>
 
@@ -630,7 +644,30 @@ I will always choose you.
 </p>
 </footer>
 
+<!-- Firebase CDN -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js"></script>
+
 <script>
+// ============================================
+// FIREBASE CONFIGURATION - REPLACE WITH YOUR CONFIG
+// ============================================
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const storage = firebase.storage();
+
+// ============================================
+// MUSIC CONTROL
+// ============================================
 const song = document.getElementById('loveSong');
 const musicBtn = document.getElementById('musicBtn');
 let playing = false;
@@ -660,6 +697,9 @@ toggleMusic();
 }
 },{once:true});
 
+// ============================================
+// SCROLL REVEAL ANIMATION
+// ============================================
 const revealItems = document.querySelectorAll('.reveal');
 function reveal(){
 revealItems.forEach(el=>{
@@ -672,6 +712,9 @@ el.classList.add('active');
 window.addEventListener('scroll',reveal);
 reveal();
 
+// ============================================
+// SURPRISE ANIMATION
+// ============================================
 function showSurprise(){
 const box = document.getElementById('surpriseBox');
 box.style.display='block';
@@ -693,6 +736,9 @@ setTimeout(()=>heart.remove(),4500);
 }
 }
 
+// ============================================
+// QUOTES SLIDER
+// ============================================
 const quotes=[
 'You are my favorite chapter ❤️',
 'Mana story forever cinematic ✨',
@@ -705,6 +751,9 @@ document.getElementById('quoteSlider').innerHTML=quotes[q];
 q=(q+1)%quotes.length;
 },3000);
 
+// ============================================
+// COUNTDOWN TIMER
+// ============================================
 const targetDate = new Date('May 17, 2026 00:00:00').getTime();
 setInterval(()=>{
 const now = new Date().getTime();
@@ -720,6 +769,9 @@ document.getElementById('minutes').innerText=m;
 document.getElementById('seconds').innerText=s;
 },1000);
 
+// ============================================
+// BACKGROUND PARTICLES
+// ============================================
 const canvas=document.getElementById('bgCanvas');
 const ctx=canvas.getContext('2d');
 canvas.width=window.innerWidth;
@@ -757,6 +809,9 @@ canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 });
 
+// ============================================
+// IMAGE VIEWER
+// ============================================
 function openViewer(src){
 document.getElementById('viewerImage').src = src;
 document.getElementById('imageViewer').style.display = 'flex';
@@ -768,55 +823,95 @@ document.getElementById('imageViewer').style.display = 'none';
 document.body.style.overflow = 'auto';
 }
 
-function uploadImage(event, previewId){
+// ============================================
+// UPLOAD TO FIREBASE (PERMANENT ONLINE STORAGE)
+// ============================================
+async function uploadImage(event, previewId){
 const file = event.target.files[0];
+const spinnerId = previewId.replace('Preview', 'Spinner');
+const spinner = document.getElementById(spinnerId);
 
-if(file){
-const reader = new FileReader();
+if(!file){
+return;
+}
 
-reader.onload = function(e){
-const imageData = e.target.result;
+// Show loading spinner
+spinner.classList.add('show');
+
+try{
+// Create a reference to Firebase Storage
+const storageRef = storage.ref('memories/' + previewId + '_' + Date.now() + '_' + file.name);
+
+// Upload file to Firebase
+const uploadTask = storageRef.put(file);
+
+// Monitor upload progress
+uploadTask.on('state_changed',
+(snapshot) => {
+// Upload is in progress
+const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+console.log('Upload is ' + progress + '% done');
+},
+(error) => {
+// Handle unsuccessful uploads
+console.error('Upload failed:', error);
+spinner.classList.remove('show');
+alert('Upload failed: ' + error.message);
+},
+async () => {
+// Upload successful - get download URL
+const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+
+// Update image preview
 const img = document.getElementById(previewId);
+img.src = downloadURL;
 
-// Update image source
-img.src = imageData;
+// Save URL to localStorage as backup
+localStorage.setItem(previewId, downloadURL);
 
-// Save to localStorage
-localStorage.setItem(previewId, imageData);
-
-// Update click handler to open viewer
+// Update click handler
 img.parentElement.onclick = function(){
-openViewer(imageData);
+openViewer(downloadURL);
 };
 
 // Update upload text
 const uploadText = img.parentElement.querySelector('.upload-text');
 if(uploadText){
-uploadText.innerHTML = '❤️ Memory Saved ✓';
+uploadText.innerHTML = '❤️ Memory Saved Permanently ✓';
 }
 
-console.log('Image saved: ' + previewId);
-};
+// Hide spinner
+spinner.classList.remove('show');
 
-reader.readAsDataURL(file);
+console.log('Image uploaded and saved permanently!');
+}
+);
+
+}catch(error){
+console.error('Error:', error);
+spinner.classList.remove('show');
+alert('Error uploading image: ' + error.message);
 }
 }
 
+// ============================================
+// LOAD SAVED IMAGES FROM FIREBASE
+// ============================================
 function loadSavedImages(){
 const imageIds = ['selfiePreview','pondiPreview','beachPreview'];
 
 imageIds.forEach(id=>{
-const savedImage = localStorage.getItem(id);
+const savedURL = localStorage.getItem(id);
 
-if(savedImage){
+if(savedURL){
 const img = document.getElementById(id);
 
 if(img){
-img.src = savedImage;
+img.src = savedURL;
 
 // Update click handler
 img.parentElement.onclick = function(){
-openViewer(savedImage);
+openViewer(savedURL);
 };
 
 // Update upload text
@@ -834,6 +929,9 @@ console.log('Loaded saved image: ' + id);
 // Load saved images when page loads
 document.addEventListener('DOMContentLoaded', loadSavedImages);
 
+// ============================================
+// BUTTERFLY ANIMATION
+// ============================================
 const butterflyEmojis=['🦋','💖','✨'];
 
 document.addEventListener('click',(e)=>{
