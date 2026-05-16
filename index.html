@@ -1,1 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Love ❤️ | MJ Chapter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#050505;
+--card:rgba(255,255,255,0.08);
+--pink:#ff4d94;
+--purple:#8b5cf6;
+--gold:#ffd166;
+--red:#b3003c;
+--text:#fff;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+
+body{
+font-family:'Poppins',sans-serif;
+background:radial-gradient(circle at top,#240014,#050505 50%);
+color:white;
+overflow-x:hidden;
+}
+
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:linear-gradient(180deg,rgba(255,77,148,0.08),transparent,rgba(139,92,246,0.08));
+pointer-events:none;
+z-index:-2;
+}
+
+canvas{
+position:fixed;
+inset:0;
+z-index:-1;
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+position:relative;
+}
+
+.hero h1{
+font-size:clamp(3rem,10vw,7rem);
+font-family:'Great Vibes',cursive;
+background:linear-gradient(90deg,#fff,#ff9ac6,#ffd166);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 0 30px rgba(255,77,148,0.4);
+animation:glowPulse 4s infinite alternate;
+}
+
+.hero p{
+max-width:800px;
+margin-top:20px;
+font-size:1.15rem;
+line-height:1.8;
+opacity:0.9;
+}
+
+@keyframes glowPulse{
+from{transform:translateY(0px);}
+to{transform:translateY(-10px);}
+}
+
+.start-btn{
+margin-top:40px;
+padding:16px 40px;
+border:none;
+border-radius:50px;
+background:linear-gradient(90deg,var(--pink),var(--purple));
+color:white;
+font-size:1rem;
+font-weight:600;
+cursor:pointer;
+box-shadow:0 0 35px rgba(255,77,148,0.5);
+transition:0.4s;
+}
+
+.start-btn:hover{
+transform:scale(1.08);
+}
+
+.chapter-nav{
+position:fixed;
+bottom:25px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:10px;
+flex-wrap:nowrap;
+z-index:9999;
+backdrop-filter:blur(18px);
+padding:12px 18px;
+border-radius:30px;
+background:rgba(20,20,20,0.45);
+border:1px solid rgba(255,255,255,0.08);
+max-width:90%;
+overflow-x:auto;
+justify-content:flex-start;
+box-shadow:0 10px 40px rgba(0,0,0,0.35);
+}
+
+.chapter-nav::-webkit-scrollbar{
+display:none;
+}
+
+.chapter-nav a{
+color:white;
+text-decoration:none;
+padding:10px 18px;
+border-radius:30px;
+transition:0.3s;
+font-size:0.85rem;
+}
+
+.chapter-nav a:hover{
+background:rgba(255,77,148,0.25);
+}
+
+section{
+padding:120px 8%;
+position:relative;
+}
+
+.section-title{
+font-size:clamp(2.4rem,7vw,4rem);
+font-family:'Cinzel',serif;
+text-align:center;
+margin-bottom:70px;
+background:linear-gradient(90deg,#fff,#ff9ac6,#ffd166);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:35px;
+}
+
+.card{
+background:var(--card);
+border:1px solid rgba(255,255,255,0.08);
+padding:35px;
+border-radius:35px;
+backdrop-filter:blur(25px);
+box-shadow:0 10px 45px rgba(0,0,0,0.3);
+transition:0.5s;
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(135deg,rgba(255,77,148,0.12),transparent,rgba(139,92,246,0.12));
+}
+
+.card:hover{
+transform:translateY(-15px) rotateX(5deg);
+box-shadow:0 20px 55px rgba(255,77,148,0.25);
+}
+
+.card h3{
+margin-bottom:15px;
+font-size:1.4rem;
+color:#ffd6e8;
+}
+
+.polaroid{
+background:white;
+padding:12px 12px 60px;
+border-radius:8px;
+transform:rotate(-2deg);
+box-shadow:0 15px 35px rgba(0,0,0,0.35);
+transition:0.5s;
+}
+
+.polaroid:hover{
+transform:rotate(0deg) scale(1.05);
+}
+
+.photo-placeholder{
+height:260px;
+border-radius:10px;
+background:linear-gradient(135deg,#2a2a2a,#111);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:1.2rem;
+color:#aaa;
+cursor:pointer;
+position:relative;
+overflow:hidden;
+transition:0.4s;
+}
+
+.photo-placeholder:hover{
+transform:scale(1.03);
+box-shadow:0 0 30px rgba(255,77,148,0.35);
+}
+
+.photo-placeholder img{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:10px;
+}
+
+.upload-text{
+position:absolute;
+z-index:2;
+padding:12px 20px;
+background:rgba(0,0,0,0.55);
+border-radius:20px;
+backdrop-filter:blur(10px);
+}
+
+.image-viewer{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.92);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:100000;
+padding:20px;
+}
+
+.image-viewer img{
+max-width:90%;
+max-height:90vh;
+border-radius:20px;
+box-shadow:0 0 50px rgba(255,77,148,0.4);
+}
+
+.close-viewer{
+position:absolute;
+top:30px;
+right:30px;
+font-size:2rem;
+color:white;
+cursor:pointer;
+}
+
+.timeline{
+position:relative;
+padding-left:30px;
+}
+
+.timeline::before{
+content:'';
+position:absolute;
+left:0;
+top:0;
+width:4px;
+height:100%;
+background:linear-gradient(var(--pink),var(--purple));
+box-shadow:0 0 20px var(--pink);
+}
+
+.timeline-item{
+margin-bottom:50px;
+position:relative;
+}
+
+.timeline-item::before{
+content:'';
+position:absolute;
+left:-39px;
+top:5px;
+width:18px;
+height:18px;
+border-radius:50%;
+background:var(--gold);
+box-shadow:0 0 20px var(--gold);
+}
+
+.flip-card{
+perspective:1000px;
+height:260px;
+}
+
+.flip-inner{
+position:relative;
+width:100%;
+height:100%;
+transition:transform 0.8s;
+transform-style:preserve-3d;
+}
+
+.flip-card:hover .flip-inner{
+transform:rotateY(180deg);
+}
+
+.flip-front,.flip-back{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+border-radius:25px;
+padding:30px;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+.flip-front{
+background:linear-gradient(135deg,#330011,#17001f);
+}
+
+.flip-back{
+background:linear-gradient(135deg,#5b001c,#220033);
+transform:rotateY(180deg);
+}
+
+.quote-slider{
+margin-top:40px;
+font-style:italic;
+font-size:1.2rem;
+text-align:center;
+min-height:50px;
+color:#ffd6e8;
+}
+
+footer{
+padding:120px 20px;
+text-align:center;
+position:relative;
+}
+
+.stars{
+position:absolute;
+inset:0;
+background:url('https://www.transparenttextures.com/patterns/stardust.png');
+opacity:0.25;
+}
+
+.reveal{
+opacity:0;
+transform:translateY(80px);
+transition:1.2s;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+.music-btn{
+position:fixed;
+bottom:20px;
+right:20px;
+width:65px;
+height:65px;
+border-radius:50%;
+border:none;
+background:linear-gradient(135deg,var(--pink),var(--purple));
+color:white;
+font-size:1.4rem;
+box-shadow:0 0 35px rgba(255,77,148,0.45);
+z-index:9999;
+cursor:pointer;
+}
+
+.butterfly{
+position:fixed;
+font-size:26px;
+pointer-events:none;
+z-index:100000;
+animation:flyButterfly 3s ease-out forwards;
+filter:drop-shadow(0 0 12px rgba(255,105,180,0.8));
+}
+
+@keyframes flyButterfly{
+0%{
+transform:translate(0,0) scale(0.7) rotate(0deg);
+opacity:1;
+}
+50%{
+opacity:1;
+}
+100%{
+transform:translate(var(--x),var(--y)) scale(1.5) rotate(360deg);
+opacity:0;
+}
+}
+
+.countdown{
+display:flex;
+gap:20px;
+margin-top:35px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.count-box{
+background:rgba(255,255,255,0.08);
+padding:20px;
+border-radius:20px;
+min-width:100px;
+backdrop-filter:blur(10px);
+}
+
+@media(max-width:768px){
+.chapter-nav{
+bottom:15px;
+width:92%;
+padding:10px 14px;
+border-radius:22px;
+}
+
+.chapter-nav a{
+white-space:nowrap;
+font-size:0.8rem;
+padding:10px 16px;
+}
+
+.hero{
+padding-top:120px;
+}
+
+.hero p{
+font-size:1rem;
+}
+}
+</style>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+
+<nav class="chapter-nav">
+<a href="#firstday">First Day</a>
+<a href="#selfie">Selfie</a>
+<a href="#hug">Hug</a>
+<a href="#kiss">Kiss</a>
+<a href="#trip">Trip</a>
+<a href="#journey">Journey</a>
+<a href="#future">Future</a>
+</nav>
+
+<audio id="loveSong" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=relaxing-piano-music-248868.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="musicBtn">🎵</button>
+
+<section class="hero">
+<h1>Happy Birthday My Love ❤️</h1>
+<p>
+Mana story oka normal relationship kaadhu… cinematic journey.
+From first selfie to future dreams, every memory became part of mana forever story.
+</p>
+
+<div class="countdown">
+<div class="count-box"><h2 id="days">00</h2><span>Days</span></div>
+<div class="count-box"><h2 id="hours">00</h2><span>Hours</span></div>
+<div class="count-box"><h2 id="minutes">00</h2><span>Minutes</span></div>
+<div class="count-box"><h2 id="seconds">00</h2><span>Seconds</span></div>
+</div>
+
+<button class="start-btn" onclick="document.getElementById('firstday').scrollIntoView({behavior:'smooth'})">
+Start Our Journey ❤️
+</button>
+
+<div class="quote-slider" id="quoteSlider"></div>
+</section>
+
+<section id="firstday" class="reveal">
+<h2 class="section-title">Our First Day ✨</h2>
+<div class="timeline">
+<div class="timeline-item card">
+<h3>🛕 Arunachalam • Nov 30 • 9:20 AM</h3>
+<p>Mana journey ikkade start ayyindi. U hold my hand first time ❤️</p>
+</div>
+<div class="timeline-item card">
+<h3>📸 First Selfie</h3>
+<p>One photo… infinite memories.</p>
+</div>
+<div class="timeline-item card">
+<h3>💖 First Touch • Nov 29</h3>
+<p>Small moment but life long feeling.</p>
+</div>
+</div>
+</section>
+
+<section id="selfie" class="reveal">
+<h2 class="section-title">Our First Selfie 📸</h2>
+<div class="grid">
+
+<div class="polaroid">
+<input type="file" accept="image/*" id="uploadSelfie" hidden onchange="uploadImage(event,'selfiePreview')">
+<div class="photo-placeholder" onclick="document.getElementById('uploadSelfie').click()">
+<img id="selfiePreview" src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200&auto=format&fit=crop" alt="First Selfie">
+<div class="upload-text">❤️ Upload Your First Selfie</div>
+</div>
+</div>
+
+<div class="polaroid">
+<input type="file" accept="image/*" id="uploadPondi" hidden onchange="uploadImage(event,'pondiPreview')">
+<div class="photo-placeholder" onclick="document.getElementById('uploadPondi').click()">
+<img id="pondiPreview" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop" alt="Pondi Memory">
+<div class="upload-text">🌊 Upload Pondi Memory</div>
+</div>
+</div>
+
+<div class="polaroid">
+<input type="file" accept="image/*" id="uploadBeach" hidden onchange="uploadImage(event,'beachPreview')">
+<div class="photo-placeholder" onclick="document.getElementById('uploadBeach').click()">
+<img id="beachPreview" src="https://images.unsplash.com/photo-1495567720989-cebdbdd97913?q=80&w=1200&auto=format&fit=crop" alt="Rock Beach">
+<div class="upload-text">✨ Upload Rock Beach Memory</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<div class="image-viewer" id="imageViewer">
+<span class="close-viewer" onclick="closeViewer()">✕</span>
+<img id="viewerImage" src="" alt="Memory View">
+</div>
+
+<section id="hug" class="reveal">
+<h2 class="section-title">Our First Hug 🤍</h2>
+<div class="card">
+<h3>Pondi Forever Memory</h3>
+<p>
+First hug… first comfort… first time feeling like home.
+Heartbeat la unde moment ❤️
+</p>
+</div>
+</section>
+
+<section id="kiss" class="reveal">
+<h2 class="section-title">Our First Kiss 💋</h2>
+<div class="card">
+<h3>Dreamy Night In Pondi</h3>
+<p>
+Stars, silence, beach wind and mana first kiss.
+One cinematic forever memory ✨
+</p>
+</div>
+</section>
+
+<section id="trip" class="reveal">
+<h2 class="section-title">Our Trips Together 🌍</h2>
+<div class="grid">
+<div class="card"><h3>🌊 Rock Beach</h3><p>Waves, hugs, peace and forever memories.</p></div>
+<div class="card"><h3>🏍️ First Bike Drive • Dec 1</h3><p>Freedom and happiness together.</p></div>
+<div class="card"><h3>👕 April 5 • Mommy First Shirt Gift</h3><p>Nellore second trip forever special ❤️</p></div>
+</div>
+</section>
+
+<section id="journey" class="reveal">
+<h2 class="section-title">Mana Journey Together 💞</h2>
+<div class="timeline">
+<div class="timeline-item card"><h3>🍫 First Chocolate</h3><p>Snickers became special because of you.</p></div>
+<div class="timeline-item card"><h3>🌸 First Lotus Flower • March 12</h3><p>Small flower… huge emotion.</p></div>
+<div class="timeline-item card"><h3>💃 First Dance • April 18</h3><p>Felt like movie scene.</p></div>
+<div class="timeline-item card"><h3>💍 March 24 • Mommy Proposed</h3><p>Most emotional day in my life.</p></div>
+</div>
+</section>
+
+<section id="future" class="reveal">
+<h2 class="section-title">Future Plans Together 🌌</h2>
+<div class="grid">
+<div class="card"><h3>🏠 Dream Home</h3><p>Peaceful life together.</p></div>
+<div class="card"><h3>✈️ Future Trips</h3><p>More beaches, temples and memories.</p></div>
+<div class="card"><h3>💍 Marriage Dreams</h3><p>Forever journey together.</p></div>
+</div>
+</section>
+
+<section class="reveal">
+<h2 class="section-title">Reasons I Love You ❤️</h2>
+<div class="grid">
+<div class="flip-card">
+<div class="flip-inner">
+<div class="flip-front">Your Care 🤍</div>
+<div class="flip-back">Nannu nakanna ekkuva choosukuntav.</div>
+</div>
+</div>
+<div class="flip-card">
+<div class="flip-inner">
+<div class="flip-front">Your Patience ✨</div>
+<div class="flip-back">Every worst day lo kuda pakkane unnav.</div>
+</div>
+</div>
+<div class="flip-card">
+<div class="flip-inner">
+<div class="flip-front">Your Love 💖</div>
+<div class="flip-back">Nuvvu na home feeling.</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="reveal">
+<h2 class="section-title">Birthday Surprise 🎁</h2>
+<div class="card" style="text-align:center;">
+<button class="start-btn" onclick="showSurprise()">Open Surprise ❤️</button>
+<div id="surpriseBox" style="display:none;margin-top:30px;font-size:1.2rem;line-height:2;">
+Forever with you mommy ❤️<br>
+Mana story never ends.
+</div>
+</div>
+</section>
+
+<footer>
+<div class="stars"></div>
+<h2 class="section-title">Forever With You ❤️</h2>
+<p>
+Under stars, through every worst day and every happiest memory…
+I will always choose you.
+</p>
+</footer>
+
+<script>
+const song = document.getElementById('loveSong');
+const musicBtn = document.getElementById('musicBtn');
+let playing = false;
+
+async function toggleMusic(){
+try{
+if(!playing){
+song.volume = 0.35;
+await song.play();
+musicBtn.innerHTML='⏸';
+playing = true;
+}else{
+song.pause();
+musicBtn.innerHTML='🎵';
+playing = false;
+}
+}catch(err){
+console.log(err);
+}
+}
+
+musicBtn.addEventListener('click',toggleMusic);
+
+document.addEventListener('click',()=>{
+if(!playing){
+toggleMusic();
+}
+},{once:true});
+
+const revealItems = document.querySelectorAll('.reveal');
+function reveal(){
+revealItems.forEach(el=>{
+const top = el.getBoundingClientRect().top;
+if(top < window.innerHeight - 100){
+el.classList.add('active');
+}
+});
+}
+window.addEventListener('scroll',reveal);
+reveal();
+
+function showSurprise(){
+const box = document.getElementById('surpriseBox');
+box.style.display='block';
+for(let i=0;i<60;i++){
+const heart = document.createElement('div');
+heart.innerHTML='💖';
+heart.style.position='fixed';
+heart.style.left=Math.random()*100+'vw';
+heart.style.top='100vh';
+heart.style.fontSize='30px';
+heart.style.zIndex='9999';
+heart.style.transition='4s linear';
+document.body.appendChild(heart);
+setTimeout(()=>{
+heart.style.top='-10vh';
+heart.style.opacity='0';
+},100);
+setTimeout(()=>heart.remove(),4500);
+}
+}
+
+const quotes=[
+'You are my favorite chapter ❤️',
+'Mana story forever cinematic ✨',
+'Every memory with you feels magical 💖',
+'You are my peace, my happiness, my home ❤️'
+];
+let q=0;
+setInterval(()=>{
+document.getElementById('quoteSlider').innerHTML=quotes[q];
+q=(q+1)%quotes.length;
+},3000);
+
+const targetDate = new Date('May 17, 2026 00:00:00').getTime();
+setInterval(()=>{
+const now = new Date().getTime();
+const gap = targetDate-now;
+const d=Math.floor(gap/(1000*60*60*24));
+const h=Math.floor((gap%(1000*60*60*24))/(1000*60*60));
+const m=Math.floor((gap%(1000*60*60))/(1000*60));
+const s=Math.floor((gap%(1000*60))/1000);
+
+document.getElementById('days').innerText=d;
+document.getElementById('hours').innerText=h;
+document.getElementById('minutes').innerText=m;
+document.getElementById('seconds').innerText=s;
+},1000);
+
+const canvas=document.getElementById('bgCanvas');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+const particles=[];
+for(let i=0;i<120;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*3+1,
+dx:(Math.random()-0.5)*0.5,
+dy:(Math.random()-0.5)*0.5
+});
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle='rgba(255,105,180,0.7)';
+ctx.fill();
+p.x+=p.dx;
+p.y+=p.dy;
+if(p.x<0||p.x>canvas.width)p.dx*=-1;
+if(p.y<0||p.y>canvas.height)p.dy*=-1;
+});
+requestAnimationFrame(animate);
+}
+animate();
+
+window.addEventListener('resize',()=>{
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+});
+
+function openViewer(src){
+document.getElementById('viewerImage').src = src;
+document.getElementById('imageViewer').style.display = 'flex';
+document.body.style.overflow = 'hidden';
+}
+
+function closeViewer(){
+document.getElementById('imageViewer').style.display = 'none';
+document.body.style.overflow = 'auto';
+}
+
+function uploadImage(event, previewId){
+const file = event.target.files[0];
+
+if(file){
+const reader = new FileReader();
+
+reader.onload = function(e){
+const imageData = e.target.result;
+const img = document.getElementById(previewId);
+
+img.src = imageData;
+
+localStorage.setItem(previewId, imageData);
+
+img.parentElement.setAttribute(
+'onclick',
+`openViewer('${imageData}')`
+);
+
+const uploadText = img.parentElement.querySelector('.upload-text');
+if(uploadText){
+uploadText.innerHTML = '❤️ Memory Saved';
+}
+};
+
+reader.readAsDataURL(file);
+}
+}
+
+function loadSavedImages(){
+const imageIds = ['selfiePreview','pondiPreview','beachPreview'];
+
+imageIds.forEach(id=>{
+const savedImage = localStorage.getItem(id);
+
+if(savedImage){
+const img = document.getElementById(id);
+
+if(img){
+img.src = savedImage;
+
+img.parentElement.setAttribute(
+'onclick',
+`openViewer('${savedImage}')`
+);
+
+const uploadText = img.parentElement.querySelector('.upload-text');
+if(uploadText){
+uploadText.innerHTML = '❤️ Saved Memory';
+}
+}
+}
+});
+}
+
+console.assert(typeof openViewer === 'function','openViewer missing');
+console.assert(typeof closeViewer === 'function','closeViewer missing');
+console.assert(typeof loadSavedImages === 'function','loadSavedImages missing');
+
+loadSavedImages();
+
+const butterflyEmojis=['🦋','💖','✨'];
+
+document.addEventListener('click',(e)=>{
+for(let i=0;i<12;i++){
+const butterfly=document.createElement('div');
+butterfly.className='butterfly';
+butterfly.innerHTML=butterflyEmojis[Math.floor(Math.random()*butterflyEmojis.length)];
+
+const randomX=(Math.random()-0.5)*400+'px';
+const randomY=(Math.random()*-500)+'px';
+
+butterfly.style.left=e.clientX+'px';
+butterfly.style.top=e.clientY+'px';
+butterfly.style.setProperty('--x',randomX);
+butterfly.style.setProperty('--y',randomY);
+
+butterfly.style.animationDuration=(2+Math.random()*2)+'s';
+
+document.body.appendChild(butterfly);
+
+setTimeout(()=>{
+butterfly.remove();
+},4000);
+}
+});
+</script>
+</body>
+</html>
 
