@@ -568,7 +568,7 @@ background:linear-gradient(145deg,#ff4d94,#8b5cf6);
 }
 
 .cake-knife.animate{
-animation:knifeSlice 1.2s cubic-bezier(.2,.8,.2,1);
+animation:knifeSlice 2.4s cubic-bezier(.2,.8,.2,1);
 }
 
 @keyframes knifeSlice{
@@ -815,8 +815,8 @@ position:fixed;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%) scale(0.7);
-padding:22px 40px;
-font-size:2rem;
+padding:12px 24px;
+font-size:1rem;
 font-weight:700;
 background:rgba(20,20,20,0.82);
 backdrop-filter:blur(20px);
@@ -840,8 +840,8 @@ position:fixed;
 bottom:40px;
 left:50%;
 transform:translateX(-50%) scale(0.8);
-padding:18px 32px;
-font-size:1.25rem;
+padding:12px 22px;
+font-size:0.92rem;
 font-weight:600;
 background:rgba(20,20,20,0.82);
 backdrop-filter:blur(20px);
@@ -2065,7 +2065,7 @@ slice.style.setProperty('--offset', (Math.random() * 90 - 45).toFixed(1));
 
         setTimeout(() => crumb.remove(), 1400);
       }
-    }, i * 120);
+    }, i * 280);
   }
 
   const title = document.createElement('div');
@@ -2190,7 +2190,7 @@ title.innerHTML = 'Happy Birthday<br>Mommy ❤️';
 
   setTimeout(() => {
     cake.classList.remove('sliced');
-  }, 1200);
+  }, 2600);
 });
 
 const butterflyIcons = ['🦋','💖','✨','🌸'];
