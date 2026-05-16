@@ -644,26 +644,156 @@ I will always choose you.
 </p>
 </footer>
 
-<!-- Firebase CDN -->
+<!-- Firebase CDN - Modular SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js"></script>
 
-<script>
+<script type="module">
 // ============================================
-// FIREBASE CONFIGURATION - REPLACE WITH YOUR CONFIG
+// FIREBASE CONFIGURATION - LIVE CREDENTIALS
 // ============================================
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js';
+
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCyfAOOebD4LDZ-Gd1mA_1L9sA7KDYW6BQ",
+  authDomain: "mjstory-57c2b.firebaseapp.com",
+  projectId: "mjstory-57c2b",
+  storageBucket: "mjstory-57c2b.firebasestorage.app",
+  messagingSenderId: "1056930868287",
+  appId: "1:1056930868287:web:6a3fcff7dda6ed25581c8a"
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const storage = firebase.storage();
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
+
+// Make functions globally available
+window.uploadImage = uploadImage;
+window.openViewer = openViewer;
+window.closeViewer = closeViewer;
+window.showSurprise = showSurprise;
+
+// ============================================
+// UPLOAD TO FIREBASE (PERMANENT ONLINE STORAGE)
+// ============================================
+async function uploadImage(event, previewId){
+const file = event.target.files[0];
+const spinnerId = previewId.replace('Preview', 'Spinner');
+const spinner = document.getElementById(spinnerId);
+
+if(!file){
+return;
+}
+
+// Show loading spinner
+spinner.classList.add('show');
+
+try{
+// Create a unique filename
+const timestamp = Date.now();
+const filename = `${previewId}_${timestamp}_${file.name}`;
+const storageRef = ref(storage, `memories/${filename}`);
+
+// Upload file to Firebase Storage
+const snapshot = await uploadBytes(storageRef, file);
+console.log('Upload successful:', snapshot);
+
+// Get permanent download URL
+const downloadURL = await getDownloadURL(snapshot.ref);
+
+// Update image preview
+const img = document.getElementById(previewId);
+img.src = downloadURL;
+
+// Save URL to localStorage as backup
+localStorage.setItem(previewId, downloadURL);
+
+// Also save to a master list in localStorage
+let savedImages = JSON.parse(localStorage.getItem('mjstory_images') || '{}');
+savedImages[previewId] = downloadURL;
+localStorage.setItem('mjstory_images', JSON.stringify(savedImages));
+
+// Update click handler to open image viewer
+img.parentElement.onclick = function(){
+openViewer(downloadURL);
+};
+
+// Update upload text
+const uploadText = img.parentElement.querySelector('.upload-text');
+if(uploadText){
+uploadText.innerHTML = '❤️ Memory Saved Permanently ✓';
+}
+
+// Hide spinner
+spinner.classList.remove('show');
+
+console.log('Image uploaded and saved permanently online!');
+console.log('Download URL:', downloadURL);
+
+}catch(error){
+console.error('Error uploading image:', error);
+spinner.classList.remove('show');
+alert('Error uploading image: ' + error.message);
+}
+}
+
+// ============================================
+// LOAD SAVED IMAGES FROM FIREBASE/LOCALSTORAGE
+// ============================================
+function loadSavedImages(){
+const imageIds = ['selfiePreview','pondiPreview','beachPreview'];
+
+// Check master list first
+const savedImages = JSON.parse(localStorage.getItem('mjstory_images') || '{}');
+
+imageIds.forEach(id=>{
+let savedURL = savedImages[id] || localStorage.getItem(id);
+
+if(savedURL){
+const img = document.getElementById(id);
+
+if(img){
+img.src = savedURL;
+
+// Update click handler
+img.parentElement.onclick = function(){
+openViewer(savedURL);
+};
+
+// Update upload text
+const uploadText = img.parentElement.querySelector('.upload-text');
+if(uploadText){
+uploadText.innerHTML = '❤️ Saved Memory';
+}
+
+console.log('Loaded saved image: ' + id);
+}
+}
+});
+}
+
+// Load saved images when page loads
+document.addEventListener('DOMContentLoaded', loadSavedImages);
+
+// ============================================
+// IMAGE VIEWER
+// ============================================
+function openViewer(src){
+document.getElementById('viewerImage').src = src;
+document.getElementById('imageViewer').style.display = 'flex';
+document.body.style.overflow = 'hidden';
+}
+
+function closeViewer(){
+document.getElementById('imageViewer').style.display = 'none';
+document.body.style.overflow = 'auto';
+}
+
+// Close viewer on ESC key
+document.addEventListener('keydown', (e) => {
+if(e.key === 'Escape') closeViewer();
+});
 
 // ============================================
 // MUSIC CONTROL
@@ -715,7 +845,7 @@ reveal();
 // ============================================
 // SURPRISE ANIMATION
 // ============================================
-function showSurprise(){
+window.showSurprise = function(){
 const box = document.getElementById('surpriseBox');
 box.style.display='block';
 for(let i=0;i<60;i++){
@@ -810,126 +940,6 @@ canvas.height=window.innerHeight;
 });
 
 // ============================================
-// IMAGE VIEWER
-// ============================================
-function openViewer(src){
-document.getElementById('viewerImage').src = src;
-document.getElementById('imageViewer').style.display = 'flex';
-document.body.style.overflow = 'hidden';
-}
-
-function closeViewer(){
-document.getElementById('imageViewer').style.display = 'none';
-document.body.style.overflow = 'auto';
-}
-
-// ============================================
-// UPLOAD TO FIREBASE (PERMANENT ONLINE STORAGE)
-// ============================================
-async function uploadImage(event, previewId){
-const file = event.target.files[0];
-const spinnerId = previewId.replace('Preview', 'Spinner');
-const spinner = document.getElementById(spinnerId);
-
-if(!file){
-return;
-}
-
-// Show loading spinner
-spinner.classList.add('show');
-
-try{
-// Create a reference to Firebase Storage
-const storageRef = storage.ref('memories/' + previewId + '_' + Date.now() + '_' + file.name);
-
-// Upload file to Firebase
-const uploadTask = storageRef.put(file);
-
-// Monitor upload progress
-uploadTask.on('state_changed',
-(snapshot) => {
-// Upload is in progress
-const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-console.log('Upload is ' + progress + '% done');
-},
-(error) => {
-// Handle unsuccessful uploads
-console.error('Upload failed:', error);
-spinner.classList.remove('show');
-alert('Upload failed: ' + error.message);
-},
-async () => {
-// Upload successful - get download URL
-const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
-
-// Update image preview
-const img = document.getElementById(previewId);
-img.src = downloadURL;
-
-// Save URL to localStorage as backup
-localStorage.setItem(previewId, downloadURL);
-
-// Update click handler
-img.parentElement.onclick = function(){
-openViewer(downloadURL);
-};
-
-// Update upload text
-const uploadText = img.parentElement.querySelector('.upload-text');
-if(uploadText){
-uploadText.innerHTML = '❤️ Memory Saved Permanently ✓';
-}
-
-// Hide spinner
-spinner.classList.remove('show');
-
-console.log('Image uploaded and saved permanently!');
-}
-);
-
-}catch(error){
-console.error('Error:', error);
-spinner.classList.remove('show');
-alert('Error uploading image: ' + error.message);
-}
-}
-
-// ============================================
-// LOAD SAVED IMAGES FROM FIREBASE
-// ============================================
-function loadSavedImages(){
-const imageIds = ['selfiePreview','pondiPreview','beachPreview'];
-
-imageIds.forEach(id=>{
-const savedURL = localStorage.getItem(id);
-
-if(savedURL){
-const img = document.getElementById(id);
-
-if(img){
-img.src = savedURL;
-
-// Update click handler
-img.parentElement.onclick = function(){
-openViewer(savedURL);
-};
-
-// Update upload text
-const uploadText = img.parentElement.querySelector('.upload-text');
-if(uploadText){
-uploadText.innerHTML = '❤️ Saved Memory';
-}
-
-console.log('Loaded saved image: ' + id);
-}
-}
-});
-}
-
-// Load saved images when page loads
-document.addEventListener('DOMContentLoaded', loadSavedImages);
-
-// ============================================
 // BUTTERFLY ANIMATION
 // ============================================
 const butterflyEmojis=['🦋','💖','✨'];
@@ -957,6 +967,7 @@ butterfly.remove();
 },4000);
 }
 });
+
 </script>
 </body>
 </html>
