@@ -3,234 +3,387 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday My Love ❤️ | MJ Chapter</title>
+<title>MJ Chapter ❤️</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
 --bg:#050505;
---card:rgba(255,255,255,0.08);
 --pink:#ff4d94;
 --purple:#8b5cf6;
 --gold:#ffd166;
---red:#b3003c;
---text:#fff;
+--card:rgba(255,255,255,0.08);
 }
-
 *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
-
 body{
 font-family:'Poppins',sans-serif;
-background:radial-gradient(circle at top,#240014,#050505 50%);
+background:radial-gradient(circle at top,#240014,#050505 55%);
 color:white;
 overflow-x:hidden;
 }
-
-body::before{
-content:'';
-position:fixed;
-inset:0;
-background:linear-gradient(180deg,rgba(255,77,148,0.08),transparent,rgba(139,92,246,0.08));
-pointer-events:none;
-z-index:-2;
-}
-
 canvas{
 position:fixed;
 inset:0;
 z-index:-1;
 }
-
 .hero{
 min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+perspective:1400px;
+position:relative;
+overflow:hidden;
+}
+.hero::before{
+content:'';
+position:absolute;
+width:700px;
+height:700px;
+background:radial-gradient(circle,rgba(255,77,148,0.18),transparent 70%);
+filter:blur(40px);
+animation:heroGlow 8s ease-in-out infinite;
+}
+@keyframes heroGlow{
+0%,100%{transform:scale(1) translateY(0px);} 
+50%{transform:scale(1.15) translateY(-20px);} 
+}
+.hero h1{
+font-family:'Great Vibes',cursive;
+font-size:clamp(3.5rem,10vw,8rem);
+background:linear-gradient(90deg,#fff,#ff9ac6,#ffd166);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 0 35px rgba(255,77,148,0.45);
+transform-style:preserve-3d;
+animation:titleFloat 5s ease-in-out infinite;
+filter:drop-shadow(0 20px 35px rgba(255,77,148,0.3));
+}
+@keyframes titleFloat{
+0%,100%{transform:rotateX(0deg) rotateY(0deg) translateY(0px);} 
+50%{transform:rotateX(8deg) rotateY(-8deg) translateY(-12px);} 
+}
+.hero p{
+margin-top:20px;
+max-width:820px;
+line-height:1.9;
+opacity:0.95;
+font-size:1.08rem;
+background:rgba(255,255,255,0.06);
+padding:18px 28px;
+border-radius:25px;
+backdrop-filter:blur(18px);
+box-shadow:0 12px 35px rgba(0,0,0,0.25);
+transform:translateZ(40px);
+}
+.chapter-nav{
+position:fixed;
+bottom:18px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:10px;
+padding:12px 18px;
+background:rgba(0,0,0,0.45);
+backdrop-filter:blur(20px);
+border-radius:30px;
+z-index:9999;
+overflow:auto;
+max-width:92%;
+}
+.chapter-nav a{
+color:white;
+text-decoration:none;
+padding:10px 16px;
+border-radius:20px;
+white-space:nowrap;
+}
+.chapter-nav a:hover{
+background:rgba(255,77,148,0.2);
+}
+.music-btn{
+position:fixed;
+right:20px;
+bottom:90px;
+width:60px;
+height:60px;
+border:none;
+border-radius:50%;
+font-size:1.4rem;
+background:linear-gradient(135deg,var(--pink),var(--purple));
+color:white;
+box-shadow:0 0 30px rgba(255,77,148,0.45);
+z-index:9999;
+cursor:pointer;
+animation:musicPulse 3s infinite;
+}
+@keyframes musicPulse{
+0%,100%{transform:scale(1);} 
+50%{transform:scale(1.08);} 
+}
+.hero-badge{
+margin-top:25px;
+padding:14px 26px;
+border-radius:40px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,0.12);
+box-shadow:0 10px 30px rgba(0,0,0,0.25);
+font-weight:600;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+.hero-buttons{
+display:flex;
+gap:18px;
+margin-top:35px;
+flex-wrap:wrap;
+justify-content:center;
+}
+.hero-btn{
+padding:16px 28px;
+border-radius:40px;
+text-decoration:none;
+color:white;
+font-weight:600;
+background:linear-gradient(135deg,rgba(255,77,148,0.25),rgba(139,92,246,0.2));
+border:1px solid rgba(255,255,255,0.12);
+backdrop-filter:blur(18px);
+transition:0.5s;
+box-shadow:0 10px 25px rgba(0,0,0,0.25);
+}
+.hero-btn:hover{
+transform:translateY(-8px) scale(1.05);
+box-shadow:0 20px 40px rgba(255,77,148,0.3);
+}
+.floating-heart{
+position:absolute;
+font-size:28px;
+opacity:0.18;
+animation:floatAround 14s linear infinite;
+}
+.balloon{
+position:absolute;
+font-size:4rem;
+animation:balloonFloat linear infinite;
+opacity:0.9;
+filter:drop-shadow(0 10px 20px rgba(255,77,148,0.35));
+}
+.balloon:nth-child(1){left:5%;animation-duration:18s;}
+.balloon:nth-child(2){left:18%;animation-duration:22s;}
+.balloon:nth-child(3){right:18%;animation-duration:20s;}
+.balloon:nth-child(4){right:5%;animation-duration:24s;}
+@keyframes balloonFloat{
+0%{transform:translateY(120vh) rotate(0deg);} 
+100%{transform:translateY(-140vh) rotate(12deg);} 
+}
+@keyframes floatAround{
+0%{transform:translateY(100vh) rotate(0deg);} 
+100%{transform:translateY(-120vh) rotate(360deg);} 
+}
+section{
+padding:110px 8%;
+}
+.section-title{
+font-size:clamp(2.2rem,7vw,4rem);
+font-family:'Cinzel',serif;
+text-align:center;
+margin-bottom:60px;
+background:linear-gradient(90deg,#fff,#ff9ac6,#ffd166);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.calendar-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:28px;
+}
+.calendar-card{
+position:relative;
+padding:28px;
+border-radius:35px;
+background:linear-gradient(145deg,rgba(255,77,148,0.12),rgba(139,92,246,0.10));
+backdrop-filter:blur(22px);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 15px 45px rgba(0,0,0,0.35);
+overflow:hidden;
+transition:0.6s;
+}
+.calendar-card::before{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(135deg,rgba(255,255,255,0.10),transparent,rgba(255,209,102,0.08));
+}
+.calendar-card:hover{
+transform:translateY(-12px) scale(1.03);
+box-shadow:0 25px 55px rgba(255,77,148,0.28);
+}
+.calendar-top{
+display:flex;
+align-items:center;
+gap:18px;
+margin-bottom:20px;
+position:relative;
+z-index:2;
+}
+.calendar-date{
+min-width:78px;
+height:78px;
+border-radius:22px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#ff4d94,#8b5cf6);
+box-shadow:0 10px 25px rgba(255,77,148,0.35);
+}
+.calendar-date span:first-child{
+font-size:1.6rem;
+font-weight:700;
+line-height:1;
+}
+.calendar-date span:last-child{
+font-size:0.8rem;
+letter-spacing:1px;
+text-transform:uppercase;
+opacity:0.9;
+margin-top:4px;
+}
+.calendar-content{
+position:relative;
+z-index:2;
+}
+.calendar-content h3{
+font-size:1.2rem;
+margin-bottom:10px;
+color:#ffe7f1;
+}
+.calendar-content p{
+line-height:1.8;
+color:#f5dbe7;
+font-size:0.95rem;
+}
+.future-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+gap:40px;
+perspective:1600px;
+}
+.future-card{
+position:relative;
+min-height:260px;
+padding:35px;
+border-radius:38px;
+overflow:hidden;
+background:linear-gradient(145deg,rgba(255,77,148,0.14),rgba(139,92,246,0.12),rgba(255,209,102,0.08));
+backdrop-filter:blur(25px);
+border:1px solid rgba(255,255,255,0.10);
+box-shadow:0 20px 55px rgba(0,0,0,0.35);
+transform-style:preserve-3d;
+transition:0.8s cubic-bezier(.2,.8,.2,1);
+}
+.future-card::before{
+content:'';
+position:absolute;
+inset:-2px;
+background:conic-gradient(from 180deg,var(--pink),var(--purple),var(--gold),var(--pink));
+opacity:0;
+transition:0.7s;
+filter:blur(25px);
+}
+.future-card::after{
+content:'';
+position:absolute;
+width:240px;
+height:240px;
+background:radial-gradient(circle,rgba(255,255,255,0.10),transparent 70%);
+top:-100px;
+right:-70px;
+}
+.future-card:hover::before{
+opacity:0.8;
+}
+.future-card:hover{
+transform:rotateX(12deg) rotateY(-10deg) translateY(-18px) scale(1.05);
+box-shadow:0 35px 75px rgba(255,77,148,0.35);
+}
+.future-content{
+position:relative;
+z-index:2;
+height:100%;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-padding:20px;
-position:relative;
 }
-
-.hero h1{
-font-size:clamp(3rem,10vw,7rem);
-font-family:'Great Vibes',cursive;
-background:linear-gradient(90deg,#fff,#ff9ac6,#ffd166);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-text-shadow:0 0 30px rgba(255,77,148,0.4);
-animation:glowPulse 4s infinite alternate;
+.future-icon{
+font-size:4rem;
+margin-bottom:22px;
+filter:drop-shadow(0 0 20px rgba(255,209,102,0.6));
+animation:futureFloat 4s ease-in-out infinite;
 }
-
-.hero p{
-max-width:800px;
-margin-top:20px;
-font-size:1.15rem;
-line-height:1.8;
-opacity:0.9;
-}
-
-@keyframes glowPulse{
-from{transform:translateY(0px);}
-to{transform:translateY(-10px);}
-}
-
-.start-btn{
-margin-top:40px;
-padding:16px 40px;
-border:none;
-border-radius:50px;
-background:linear-gradient(90deg,var(--pink),var(--purple));
-color:white;
-font-size:1rem;
-font-weight:600;
-cursor:pointer;
-box-shadow:0 0 35px rgba(255,77,148,0.5);
-transition:0.4s;
-}
-
-.start-btn:hover{
-transform:scale(1.08);
-}
-
-.chapter-nav{
-position:fixed;
-bottom:25px;
-left:50%;
-transform:translateX(-50%);
-display:flex;
-gap:10px;
-flex-wrap:nowrap;
-z-index:9999;
-backdrop-filter:blur(18px);
-padding:12px 18px;
-border-radius:30px;
-background:rgba(20,20,20,0.45);
-border:1px solid rgba(255,255,255,0.08);
-max-width:90%;
-overflow-x:auto;
-justify-content:flex-start;
-box-shadow:0 10px 40px rgba(0,0,0,0.35);
-}
-
-.chapter-nav::-webkit-scrollbar{
-display:none;
-}
-
-.chapter-nav a{
-color:white;
-text-decoration:none;
-padding:10px 18px;
-border-radius:30px;
-transition:0.3s;
-font-size:0.85rem;
-}
-
-.chapter-nav a:hover{
-background:rgba(255,77,148,0.25);
-}
-
-section{
-padding:120px 8%;
-position:relative;
-}
-
-.section-title{
-font-size:clamp(2.4rem,7vw,4rem);
+.future-title{
+font-size:1.5rem;
+margin-bottom:16px;
 font-family:'Cinzel',serif;
-text-align:center;
-margin-bottom:70px;
-background:linear-gradient(90deg,#fff,#ff9ac6,#ffd166);
+background:linear-gradient(90deg,#fff,#ffbdd8,#ffd166);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:35px;
+.future-text{
+line-height:1.9;
+color:#ffe8f2;
+font-size:1rem;
 }
-
-.card{
-background:var(--card);
-border:1px solid rgba(255,255,255,0.08);
-padding:35px;
-border-radius:35px;
-backdrop-filter:blur(25px);
-box-shadow:0 10px 45px rgba(0,0,0,0.3);
-transition:0.5s;
-position:relative;
-overflow:hidden;
-}
-
-.card::before{
-content:'';
+.future-orb{
 position:absolute;
-inset:0;
-background:linear-gradient(135deg,rgba(255,77,148,0.12),transparent,rgba(139,92,246,0.12));
+width:180px;
+height:180px;
+border-radius:50%;
+background:radial-gradient(circle,rgba(255,77,148,0.22),transparent 70%);
+filter:blur(20px);
+animation:orbMove 6s ease-in-out infinite;
 }
-
-.card:hover{
-transform:translateY(-15px) rotateX(5deg);
-box-shadow:0 20px 55px rgba(255,77,148,0.25);
+@keyframes futureFloat{
+0%,100%{transform:translateY(0px);} 
+50%{transform:translateY(-12px);} 
 }
-
-.card h3{
-margin-bottom:15px;
-font-size:1.4rem;
-color:#ffd6e8;
+@keyframes orbMove{
+0%,100%{transform:scale(1) translate(0,0);} 
+50%{transform:scale(1.2) translate(15px,-10px);} 
 }
-
 .polaroid{
 background:white;
-padding:12px 12px 60px;
-border-radius:8px;
-transform:rotate(-2deg);
-box-shadow:0 15px 35px rgba(0,0,0,0.35);
-transition:0.5s;
+padding:12px 12px 55px;
+border-radius:10px;
 }
-
-.polaroid:hover{
-transform:rotate(0deg) scale(1.05);
-}
-
 .photo-placeholder{
+position:relative;
 height:260px;
 border-radius:10px;
-background:linear-gradient(135deg,#2a2a2a,#111);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:1.2rem;
-color:#aaa;
-cursor:pointer;
-position:relative;
 overflow:hidden;
-transition:0.4s;
+cursor:pointer;
 }
-
-.photo-placeholder:hover{
-transform:scale(1.03);
-box-shadow:0 0 30px rgba(255,77,148,0.35);
-}
-
 .photo-placeholder img{
 width:100%;
 height:100%;
 object-fit:cover;
-border-radius:10px;
 }
-
 .upload-text{
 position:absolute;
-z-index:2;
-padding:12px 20px;
-background:rgba(0,0,0,0.55);
+bottom:10px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(0,0,0,0.5);
+padding:10px 16px;
 border-radius:20px;
-backdrop-filter:blur(10px);
 }
-
 .image-viewer{
 position:fixed;
 inset:0;
@@ -239,292 +392,216 @@ display:none;
 align-items:center;
 justify-content:center;
 z-index:100000;
-padding:20px;
 }
-
 .image-viewer img{
 max-width:90%;
 max-height:90vh;
 border-radius:20px;
-box-shadow:0 0 50px rgba(255,77,148,0.4);
 }
-
 .close-viewer{
 position:absolute;
-top:30px;
-right:30px;
+top:20px;
+right:25px;
 font-size:2rem;
-color:white;
 cursor:pointer;
 }
-
-.timeline{
+.journey-track{
 position:relative;
-padding-left:30px;
+max-width:1200px;
+margin:auto;
+padding:40px 0;
 }
-
-.timeline::before{
-content:'';
-position:absolute;
-left:0;
-top:0;
-width:4px;
-height:100%;
-background:linear-gradient(var(--pink),var(--purple));
-box-shadow:0 0 20px var(--pink);
-}
-
-.timeline-item{
-margin-bottom:50px;
-position:relative;
-}
-
-.timeline-item::before{
-content:'';
-position:absolute;
-left:-39px;
-top:5px;
-width:18px;
-height:18px;
-border-radius:50%;
-background:var(--gold);
-box-shadow:0 0 20px var(--gold);
-}
-
-.roadmap{
-position:relative;
-margin-top:80px;
-padding:80px 0;
-}
-
-.road-line{
+.journey-line{
 position:absolute;
 left:50%;
 top:0;
 transform:translateX(-50%);
-width:8px;
+width:10px;
 height:100%;
 background:linear-gradient(to bottom,#ff4d94,#8b5cf6,#ffd166);
-border-radius:20px;
-box-shadow:0 0 35px rgba(255,77,148,0.6);
+border-radius:40px;
+box-shadow:0 0 40px rgba(255,77,148,0.45);
 }
-
-.road-stop{
+.journey-node{
 position:relative;
-width:100%;
 display:flex;
-align-items:center;
 justify-content:space-between;
-margin:90px 0;
+align-items:center;
+margin:120px 0;
 }
-
-.road-stop:nth-child(even){
+.journey-node:nth-child(even){
 flex-direction:row-reverse;
 }
-
-.road-card{
+.journey-card{
 width:42%;
-background:rgba(255,255,255,0.08);
 padding:35px;
-border-radius:30px;
+border-radius:35px;
+background:linear-gradient(145deg,rgba(255,77,148,0.12),rgba(139,92,246,0.10));
 backdrop-filter:blur(20px);
 border:1px solid rgba(255,255,255,0.08);
-box-shadow:0 10px 45px rgba(0,0,0,0.35);
-transition:0.5s;
+box-shadow:0 15px 45px rgba(0,0,0,0.35);
+position:relative;
+overflow:hidden;
+transition:0.6s;
 }
-
-.road-card:hover{
-transform:translateY(-10px) scale(1.02);
-box-shadow:0 0 45px rgba(255,77,148,0.35);
+.journey-card::before{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(135deg,rgba(255,255,255,0.08),transparent,rgba(255,209,102,0.08));
 }
-
-.road-dot{
+.journey-card:hover{
+transform:translateY(-12px) scale(1.03);
+box-shadow:0 25px 60px rgba(255,77,148,0.30);
+}
+.journey-card h3,.journey-card p{
+position:relative;
+z-index:2;
+}
+.journey-route{
+margin-top:18px;
+padding:16px;
+border-radius:20px;
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.08);
+font-size:0.95rem;
+line-height:1.8;
+}
+.journey-dot{
 position:absolute;
 left:50%;
 transform:translateX(-50%);
-width:32px;
-height:32px;
+width:34px;
+height:34px;
 border-radius:50%;
 background:linear-gradient(135deg,#ffd166,#ff4d94);
-box-shadow:0 0 35px rgba(255,209,102,0.9);
+box-shadow:0 0 30px rgba(255,209,102,0.9);
 z-index:5;
-border:4px solid rgba(255,255,255,0.15);
 }
-
-.road-emoji{
-font-size:2.2rem;
-margin-bottom:15px;
-}
-
-@media(max-width:768px){
-.road-line{
-left:20px;
-}
-
-.road-stop,
-.road-stop:nth-child(even){
-flex-direction:column;
-align-items:flex-start;
-padding-left:55px;
-}
-
-.road-dot{
-left:20px;
-}
-
-.road-card{
-width:100%;
-}
-}
-
-.flip-card{
-perspective:1000px;
-height:260px;
-}
-
-.flip-inner{
-position:relative;
-width:100%;
-height:100%;
-transition:transform 0.8s;
-transform-style:preserve-3d;
-}
-
-.flip-card:hover .flip-inner{
-transform:rotateY(180deg);
-}
-
-.flip-front,.flip-back{
+.curve-path{
 position:absolute;
-width:100%;
-height:100%;
-backface-visibility:hidden;
-border-radius:25px;
-padding:30px;
+width:140px;
+height:140px;
+border:3px dashed rgba(255,255,255,0.15);
+border-color:rgba(255,255,255,0.15) transparent transparent transparent;
+border-radius:50%;
+top:50%;
+}
+.journey-node:nth-child(odd) .curve-path{
+right:-70px;
+transform:translateY(-50%) rotate(35deg);
+}
+.journey-node:nth-child(even) .curve-path{
+left:-70px;
+transform:translateY(-50%) rotate(-35deg);
+}
+.trip-badge{
+display:inline-block;
+padding:8px 18px;
+border-radius:30px;
+background:linear-gradient(135deg,#ff4d94,#8b5cf6);
+font-size:0.82rem;
+letter-spacing:1px;
+margin-bottom:16px;
+box-shadow:0 10px 25px rgba(255,77,148,0.3);
+}
+.love-reasons{
 display:flex;
 justify-content:center;
-align-items:center;
+}
+.reason-card{
+max-width:500px;
+width:100%;
+background:linear-gradient(145deg,rgba(255,77,148,0.12),rgba(139,92,246,0.12));
+padding:40px;
+border-radius:35px;
 text-align:center;
+backdrop-filter:blur(20px);
 }
-
-.flip-front{
-background:linear-gradient(135deg,#330011,#17001f);
+.reason-icon{font-size:4rem;margin-bottom:20px;}
+.reason-title{
+font-size:2rem;
+margin-bottom:20px;
+font-family:'Cinzel',serif;
 }
-
-.flip-back{
-background:linear-gradient(135deg,#5b001c,#220033);
-transform:rotateY(180deg);
+.reason-text{line-height:1.9;}
+.countdown{
+display:flex;
+gap:28px;
+margin-top:45px;
+flex-wrap:wrap;
+justify-content:center;
+perspective:1200px;
 }
-
-.quote-slider{
-margin-top:40px;
-font-style:italic;
-font-size:1.2rem;
-text-align:center;
-min-height:50px;
-color:#ffd6e8;
-}
-
-footer{
-padding:120px 20px;
-text-align:center;
+.count-box{
 position:relative;
+background:linear-gradient(145deg,rgba(255,77,148,0.15),rgba(139,92,246,0.12));
+padding:28px 24px;
+border-radius:30px;
+min-width:140px;
+backdrop-filter:blur(25px);
+border:1px solid rgba(255,255,255,0.12);
+box-shadow:0 18px 45px rgba(0,0,0,0.35), inset 0 1px 1px rgba(255,255,255,0.08);
+transform-style:preserve-3d;
+transition:0.6s;
+overflow:hidden;
 }
-
-.stars{
+.count-box::before{
+content:'';
 position:absolute;
 inset:0;
-background:url('https://www.transparenttextures.com/patterns/stardust.png');
-opacity:0.25;
+background:linear-gradient(135deg,rgba(255,255,255,0.12),transparent,rgba(255,209,102,0.08));
 }
-
+.count-box:hover{
+transform:rotateX(12deg) rotateY(-10deg) translateY(-12px) scale(1.06);
+box-shadow:0 25px 60px rgba(255,77,148,0.35);
+}
+.count-box h2{
+font-size:3rem;
+font-weight:700;
+background:linear-gradient(90deg,#fff,#ffd166);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 0 18px rgba(255,209,102,0.45);
+position:relative;
+z-index:2;
+}
+.count-box span{
+position:relative;
+z-index:2;
+font-size:0.95rem;
+letter-spacing:2px;
+text-transform:uppercase;
+opacity:0.85;
+}
+.butterfly{
+position:fixed;
+pointer-events:none;
+font-size:24px;
+animation:fly 3s linear forwards;
+}
+@keyframes fly{
+0%{transform:translate(0,0) scale(0.8);opacity:1;}
+100%{transform:translate(var(--x),var(--y)) scale(1.5);opacity:0;}
+}
 .reveal{
 opacity:0;
-transform:translateY(80px);
-transition:1.2s;
+transform:translateY(60px);
+transition:1s;
 }
-
 .reveal.active{
 opacity:1;
 transform:translateY(0);
 }
-
-.music-btn{
-position:fixed;
-bottom:20px;
-right:20px;
-width:65px;
-height:65px;
-border-radius:50%;
-border:none;
-background:linear-gradient(135deg,var(--pink),var(--purple));
-color:white;
-font-size:1.4rem;
-box-shadow:0 0 35px rgba(255,77,148,0.45);
-z-index:9999;
-cursor:pointer;
+footer{
+padding:120px 20px;
+text-align:center;
 }
-
-.butterfly{
-position:fixed;
-font-size:26px;
-pointer-events:none;
-z-index:100000;
-animation:flyButterfly 3s ease-out forwards;
-filter:drop-shadow(0 0 12px rgba(255,105,180,0.8));
-}
-
-@keyframes flyButterfly{
-0%{
-transform:translate(0,0) scale(0.7) rotate(0deg);
-opacity:1;
-}
-50%{
-opacity:1;
-}
-100%{
-transform:translate(var(--x),var(--y)) scale(1.5) rotate(360deg);
-opacity:0;
-}
-}
-
-.countdown{
-display:flex;
-gap:20px;
-margin-top:35px;
-flex-wrap:wrap;
-justify-content:center;
-}
-
-.count-box{
-background:rgba(255,255,255,0.08);
-padding:20px;
-border-radius:20px;
-min-width:100px;
-backdrop-filter:blur(10px);
-}
-
 @media(max-width:768px){
-.chapter-nav{
-bottom:15px;
-width:92%;
-padding:10px 14px;
-border-radius:22px;
-}
-
-.chapter-nav a{
-white-space:nowrap;
-font-size:0.8rem;
-padding:10px 16px;
-}
-
-.hero{
-padding-top:120px;
-}
-
-.hero p{
-font-size:1rem;
-}
+.journey-track::before{left:18px;}
+.journey-node,.journey-node:nth-child(even){flex-direction:column;align-items:flex-start;padding-left:55px;}
+.journey-card{width:100%;}
+.journey-dot{left:18px;}
 }
 </style>
 </head>
@@ -533,10 +610,6 @@ font-size:1rem;
 
 <nav class="chapter-nav">
 <a href="#firstday">First Day</a>
-<a href="#selfie">Selfie</a>
-<a href="#hug">Hug</a>
-<a href="#kiss">Kiss</a>
-<a href="#trip">Trip</a>
 <a href="#journey">Journey</a>
 <a href="#future">Future</a>
 </nav>
@@ -548,8 +621,23 @@ font-size:1rem;
 <button class="music-btn" id="musicBtn">🎵</button>
 
 <section class="hero">
+<div class="balloon">🎈</div>
+<div class="balloon">🎈</div>
+<div class="balloon">🎈</div>
+<div class="balloon">🎈</div>
+<div class="floating-heart" style="left:8%;animation-duration:12s;">💖</div>
+<div class="floating-heart" style="left:22%;animation-duration:15s;">✨</div>
+<div class="floating-heart" style="left:48%;animation-duration:18s;">🦋</div>
+<div class="floating-heart" style="left:70%;animation-duration:14s;">💞</div>
+<div class="floating-heart" style="left:88%;animation-duration:17s;">🌸</div>
 <h1>Happy Birthday My Love ❤️</h1>
-
+<p>This is not just a love story… this is our forever cinematic universe ❤️✨</p>
+<div class="hero-badge">It has been 233 days ✨</div>
+<div class="hero-buttons">
+<a href="#journey" class="hero-btn">💞 Our Journey</a>
+<a href="#future" class="hero-btn">🌌 Future Plans</a>
+<a href="#firstday" class="hero-btn">📸 Memories</a>
+</div>
 
 <div class="countdown">
 <div class="count-box"><h2 id="days">00</h2><span>Days</span></div>
@@ -558,457 +646,227 @@ font-size:1rem;
 <div class="count-box"><h2 id="seconds">00</h2><span>Seconds</span></div>
 </div>
 
-<button class="start-btn" onclick="document.getElementById('firstday').scrollIntoView({behavior:'smooth'})">
-Start Our Journey ❤️
-</button>
-
-<div class="quote-slider" id="quoteSlider"></div>
 </section>
 
-<section id="firstday" class="reveal">
-<h2 class="section-title">Our First Day ✨</h2>
-<div class="timeline">
-<div class="timeline-item card">
-<h3>📸 Aug 30 • First Group Selfie</h3>
-<p>
-Our first group selfie together ❤️
-One simple photo… but the beginning of countless memories ✨
-</p>
+<section id="firstday" class="reveal" style="position:relative;overflow:hidden;">
+<div style="position:absolute;inset:0;background:radial-gradient(circle at top,rgba(255,77,148,0.12),transparent 60%);pointer-events:none"></div>
+<h2 class="section-title">Our First Day 📅</h2>
+
+<div class="calendar-grid">
+
+<div class="calendar-card">
+<div class="calendar-top">
+<div class="calendar-date"><span>30</span><span>Aug</span></div>
+<div class="calendar-content"><h3>📸 First Group Selfie</h3></div>
+</div>
+<div class="calendar-content"><p>Our first group selfie together ❤️</p></div>
 </div>
 
-<div class="timeline-item card">
-<h3>💬 Sep 26 • Our First Day</h3>
-<p>Mana story first chatting tho start ayyindi ❤️</p>
+<div class="calendar-card">
+<div class="calendar-top">
+<div class="calendar-date"><span>26</span><span>Sep</span></div>
+<div class="calendar-content"><h3>💬 First Chat</h3></div>
+</div>
+<div class="calendar-content"><p>Mana story first chatting tho start ayyindi ❤️</p></div>
 </div>
 
-<div class="timeline-item card">
-<h3>🎀 11th October • First Gift</h3>
-<p>
-The first gift I purchased for mommy was a cute rabbit headband ❤️
-One small gift… but a very special memory forever ✨
-</p>
+<div class="calendar-card">
+<div class="calendar-top">
+<div class="calendar-date"><span>11</span><span>Oct</span></div>
+<div class="calendar-content"><h3>🎀 First Gift</h3></div>
+</div>
+<div class="calendar-content"><p>Rabbit headband became our first cute memory ❤️</p></div>
 </div>
 
-
-
-<div class="timeline-item card">
-<h3>📸 Dec 1 • First Selfie</h3>
-<p>
-One photo… infinite memories ❤️<br>
-That was also the first time nenu neku jaga veyadam ✨
-</p>
+<div class="calendar-card">
+<div class="calendar-top">
+<div class="calendar-date"><span>29</span><span>Nov</span></div>
+<div class="calendar-content"><h3>💖 First Touch</h3></div>
+</div>
+<div class="calendar-content"><p>Small moment but lifelong feeling ❤️</p></div>
 </div>
 
-
-<div class="timeline-item card">
-<h3>💖 First Touch • Nov 29</h3>
-<p>Small moment but life long feeling.</p>
+<div class="calendar-card">
+<div class="calendar-top">
+<div class="calendar-date"><span>1</span><span>Dec</span></div>
+<div class="calendar-content"><h3>📸 First Selfie</h3></div>
+</div>
+<div class="calendar-content"><p>One photo… infinite memories ❤️</p></div>
 </div>
 
-<div class="timeline-item card">
-<h3>🏍️ Dec 1 • First Bike Ride</h3>
-<p>
-Mana first bike ride together ❤️
-Road kanna journey important ayindi.
-</p>
+<div class="calendar-card">
+<div class="calendar-top">
+<div class="calendar-date"><span>1</span><span>Dec</span></div>
+<div class="calendar-content"><h3>🏍️ First Bike Ride</h3></div>
+</div>
+<div class="calendar-content"><p>Road kanna journey important ayindi ❤️</p></div>
 </div>
 
-<div class="timeline-item card">
-<h3>🌊 Dec 1 • First Time I Feed You</h3>
-<p>
-At the beach, for the first time I fed you with my own hands ❤️
-One soft peaceful moment that became forever special ✨
-</p>
+<div class="calendar-card">
+<div class="calendar-top">
+<div class="calendar-date"><span>24</span><span>Dec</span></div>
+<div class="calendar-content"><h3>🍫 First Chocolate</h3></div>
+</div>
+<div class="calendar-content"><p>Our first chocolate together was Snickers ❤️</p></div>
 </div>
 
-<div class="timeline-item card">
-<h3>🌊 Our First Beach • Rock Beach</h3>
-<p>
-Rock Beach became one of our most peaceful and beautiful memories ❤️
-Waves, hugs, emotions, and forever moments together ✨
-</p>
+<div class="calendar-card">
+<div class="calendar-top">
+<div class="calendar-date"><span>17</span><span>Feb</span></div>
+<div class="calendar-content"><h3>❤️ Our Valentine</h3></div>
+</div>
+<div class="calendar-content"><p>For others Feb 14… for us Feb 17 ❤️</p></div>
 </div>
 
-<div class="timeline-item card">
-<h3>🍫 Dec 24 • First Chocolate Together</h3>
-<p>
-Our first chocolate together was Snickers ❤️
-Small chocolate… but one unforgettable sweet memory ✨
-</p>
+<div class="calendar-card">
+<div class="calendar-top">
+<div class="calendar-date"><span>12</span><span>Mar</span></div>
+<div class="calendar-content"><h3>🌸 First Lotus Flower</h3></div>
+</div>
+<div class="calendar-content"><p>My first flower to mommy was lotus ❤️</p></div>
 </div>
 
-<div class="timeline-item card">
-<h3>🍜 Feb 25 • First Time You Cooked For Me</h3>
-<p>
-The first food mommy cooked for me was Yippee ❤️
-One simple meal… but filled with love and comfort ✨
-</p>
+<div class="calendar-card">
+<div class="calendar-top">
+<div class="calendar-date"><span>21</span><span>Mar</span></div>
+<div class="calendar-content"><h3>🥻 First Saree Gift</h3></div>
+</div>
+<div class="calendar-content"><p>One beautiful traditional memory ❤️</p></div>
 </div>
 
-<div class="timeline-item card">
-<h3>🥻 21st March • First Saree Gift</h3>
-<p>
-The first saree I bought for mommy was on 21st March ❤️
-One beautiful traditional memory that became forever special ✨
-</p>
+<div class="calendar-card">
+<div class="calendar-top">
+<div class="calendar-date"><span>18</span><span>Apr</span></div>
+<div class="calendar-content"><h3>💃 First Dance</h3></div>
 </div>
-
-<div class="timeline-item card">
-<h3>🤝 Feb 15 • First Time Meeting Bava</h3>
-<p>
-Feb 15 was the first time I met bava ❤️
-One important memory in our journey together ✨
-</p>
-</div>
-
-<div class="timeline-item card">
-<h3>❤️ Feb 17 • Our Valentine Day</h3>
-<p>
-For others Valentine’s Day is Feb 14…
-but for us, our real Valentine’s Day is Feb 17 ❤️
-Our first physical meetup became one unforgettable emotional memory ✨
-</p>
-</div>
-
-<div class="timeline-item card">
-<h3>😤 Jan 5 • First Time Nenu Jada</h3>
-<p>
-That was the first time nenu seriously jada ❤️
-Even that feeling became part of our emotional love story ✨
-</p>
-</div>
-</div>
-</section>
-
-<section id="selfie" class="reveal">
-<h2 class="section-title">Our First Selfie 📸</h2>
-
-<div class="grid">
-
-<div class="polaroid">
-<div class="photo-placeholder" onclick="openViewer('https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/first-selfie.jpg')">
-
-<img
-id="selfiePreview"
-src="https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/first-selfie.jpg"
-alt="First Selfie">
-
-<div class="upload-text">
-❤️ Our First Selfie
-</div>
-
-</div>
-</div>
-
-<div class="polaroid">
-<div class="photo-placeholder" onclick="openViewer('https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/pondi-memory.jpg')">
-
-<img
-id="pondiPreview"
-src="https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/pondi-memory.jpg"
-alt="Pondi Memory">
-
-<div class="upload-text">
-🌊 Pondi Memory
-</div>
-
-</div>
-</div>
-
-<div class="polaroid">
-<div class="photo-placeholder" onclick="openViewer('https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/rock-beach.jpg')">
-
-<img
-id="beachPreview"
-src="https://raw.githubusercontent.com/jeevanjsjsjdjhe/mjstory/main/rock-beach.jpg"
-alt="Rock Beach">
-
-<div class="upload-text">
-✨ Rock Beach
-</div>
-
-</div>
+<div class="calendar-content"><p>Movie scene la feel ayyindi ❤️</p></div>
 </div>
 
 </div>
 </section>
 
-<div class="image-viewer" id="imageViewer">
-<span class="close-viewer" onclick="closeViewer()">✕</span>
-<img id="viewerImage" src="" alt="Memory View">
-</div>
-
-<section id="hug" class="reveal">
-<h2 class="section-title">Our First Hug 🤍</h2>
-<div class="card">
-<h3>🤍 Dec 1 • First Hug</h3>
-<p>
-I was feeling very sad that day…
-then mommy hugged me ❤️
-That hug felt like peace, comfort, and home together.
-One of the most beautiful feelings in my life ✨
-</p>
-</div>
-</section>
-
-<section id="kiss" class="reveal">
-<h2 class="section-title">Our First Kiss 💋</h2>
-<div class="card">
-<h3>🛕 Nov 30 Night • Arunachalam</h3>
-<p>
-The day she touched me… I kissed her hands softly ❤️
-We stayed close, touched each other, and mommy gently massaged my hair.
-That night in Arunachalam felt emotional, peaceful, and unforgettable ✨
-Our first kiss became one of the most beautiful memories in our love story.
-</p>
-</div>
-</section>
-
-<section id="trip" class="reveal">
-<h2 class="section-title">Our Love Roadmap 🌍</h2>
-
-<div class="roadmap">
-<div class="road-line"></div>
-
-<div class="road-stop">
-<div class="road-card">
-<div class="road-emoji">🛕</div>
-<h3>First Trip • Arunachalam</h3>
-<p>
-Nov 30 • 9:20 AM ❤️<br>
-Mana journey officially started when u held my hand.
-Our first touch, first kiss, first emotions started here ✨
-</p>
-</div>
-<div class="road-dot"></div>
-<div style="width:42%"></div>
-</div>
-
-<div class="road-stop">
-<div class="road-card">
-<div class="road-emoji">🌊</div>
-<h3>Second Trip • Pondicherry</h3>
-<p>
-Dec 1 ❤️<br>
-Mommy hugged me when I was feeling sad.
-That first hug felt magical and unforgettable ✨<br>
-Rock Beach memories ❤️<br>
-Future lo malli velthey same room kavali.
-</p>
-</div>
-<div class="road-dot"></div>
-<div style="width:42%"></div>
-</div>
-
-<div class="road-stop">
-<div class="road-card">
-<div class="road-emoji">👕</div>
-<h3>Third Trip • Nellore</h3>
-<p>
-April 5 ❤️<br>
-Mana second journey together.
-Mommy naa kosam first shirt konnindi.
-One unforgettable beautiful day ✨
-</p>
-</div>
-<div class="road-dot"></div>
-<div style="width:42%"></div>
-</div>
-
-</div>
-</section>
-
-<section id="journey" class="reveal">
+<section id="journey" class="reveal" style="position:relative;overflow:hidden;">
+<div style="position:absolute;inset:0;background:radial-gradient(circle at center,rgba(139,92,246,0.10),transparent 70%);"></div>
 <h2 class="section-title">Mana Journey Together 💞</h2>
-<div class="timeline">
 
-<div class="timeline-item card">
-<h3>💬 Sep 26 • First Chat</h3>
-<p>
-Mana story normal relationship kaadhu…
-first message nunchi emotional cinematic journey start ayyindi ❤️
-</p>
+<div class="journey-track">
+<div class="journey-line"></div>
+
+<div class="journey-node">
+<div class="journey-card">
+<div class="trip-badge">TRIP 1 ✨</div>
+<h3>🛕 Arunachalam • Nov 30</h3>
+<p>Our journey officially started here ❤️</p>
+<div class="journey-route">
+📍 Home → Arunachalam<br>
+🚆 Via Train Journey
+</div>
+<div class="curve-path"></div>
+</div>
+<div class="journey-dot"></div>
+<div style="width:42%"></div>
 </div>
 
-<div class="timeline-item card">
-<h3>🛕 Arunachalam • Nov 30 • 9:20 AM</h3>
-<p>
-Our journey officially started when u held my hand.
-Aa moment nunchi life motham maripoyindi ✨
-</p>
+<div class="journey-node">
+<div class="journey-card">
+<div class="trip-badge">TRIP 2 🌊</div>
+<h3>🌊 Pondicherry • Dec 1</h3>
+<p>First hug, first beach, unforgettable emotions ❤️</p>
+<div class="journey-route">
+📍 Arunachalam → Pondicherry<br>
+🚌 Via Bus Journey
+</div>
+<div class="curve-path"></div>
+</div>
+<div class="journey-dot"></div>
+<div style="width:42%"></div>
 </div>
 
-<div class="timeline-item card">
-<h3>📸 Aug 30 • First Group Selfie</h3>
-<p>
-Before everything became magical…
-we captured our first group selfie together ❤️
-</p>
-</div>
+<div class="journey-node">
+<div class="journey-card">
+<div class="trip-badge">TRIP 3 🏍️</div>
+<h3>👕 Nellore • April 5</h3>
+<p>Mommy naa kosam first shirt konnindi ❤️</p>
+<div class="journey-route">
 
-<div class="timeline-item card">
-<h3>📸 Dec 1 • Our First Selfie</h3>
-<p>
-One selfie… infinite emotions ❤️
-Mana first photo always stays special forever.
-</p>
+🏍️ Via Bike Ride
 </div>
-
-<div class="timeline-item card">
-<h3>🤍 Nov 29 & Nov 30 • First Touch & First Kiss</h3>
-<p>
-Our first touch started on Nov 29 ❤️
-On Nov 30 night in Arunachalam, we kissed each other, stayed close, and mommy softly massaged my hair ✨
-One emotional cinematic memory that will stay forever.
-</p>
+<div class="curve-path"></div>
 </div>
-
-<div class="timeline-item card">
-<h3>🌊 Pondi & Rock Beach Memories</h3>
-<p>
-Our first hug, first kiss, first emotional comfort happened in Pondi ❤️
-Rock Beach became our forever peaceful place.
-Future lo malli Pondi velthey same room kavali ✨
-</p>
-</div>
-
-<div class="timeline-item card">
-<h3>🍫 First Chocolate • Snickers</h3>
-<p>
-Mana first chocolate together was Snickers ❤️
-Small thing… but unforgettable memory.
-</p>
-</div>
-
-<div class="timeline-item card">
-<h3>🏍️ Dec 1 • First Bike Ride</h3>
-<p>
-Mana first bike drive together ❤️
-Road kanna journey important ayindi.
-Nuvvu pakkana unte every ride beautiful ✨
-</p>
-</div>
-
-<div class="timeline-item card">
-<h3>🌸 March 12 • First Lotus Flower</h3>
-<p>
-My first flower I gave to mommy was a lotus on March 12 ❤️
-One simple flower… but one unforgettable emotional memory ✨
-</p>
-</div>
-
-<div class="timeline-item card">
-<h3>🥻 21st March • First Saree Gift</h3>
-<p>
-The first saree I bought for mommy was on 21st March ❤️
-One beautiful traditional memory that became forever special ✨
-</p>
-</div>
-
-<div class="timeline-item card">
-<h3>💍 March 24 • Proposal Day</h3>
-<p>
-Signature day lo mommy propose chesindi.
-Full emotions, tears, happiness, fear… everything together ❤️
-</p>
-</div>
-
-<div class="timeline-item card">
-<h3>👕 April 5 • Second Trip • First Shirt Gift</h3>
-<p>
-Mana second trip Nellore lo mommy naa kosam first shirt konnindi ❤️
-Public lo happiness chupinchalekapoya kani aa memory forever.
-</p>
-</div>
-
-<div class="timeline-item card">
-<h3>💃 18th April • Our First Dance</h3>
-<p>
-Movie scene la feel ayyindi ❤️
-Dance kanna aa moment beautiful and unforgettable ✨
-</p>
-</div>
-
-<div class="timeline-item card">
-<h3>😔 Worst Day • Jan 27</h3>
-<p>
-Jan 27 was my worst emotional day ❤️
-But every misunderstanding made us stronger together forever ✨
-</p>
-</div>
-
-<div class="timeline-item card">
-<h3>🫂 Promises</h3>
-<p>
-Problems vachina room dhaati bayataki vellakudadhu.
-Everything share chesukovali.
-Life long pakkane undali ❤️
-</p>
-</div>
-
-<div class="timeline-item card">
-<h3>🌌 Chapter 2026</h3>
-<p>
-2026 mana future foundation.
-Strong jobs, peaceful beginning, marriage dreams, stable life.
-Kalisi build cheyyali mana future ✨
-</p>
+<div class="journey-dot"></div>
+<div style="width:42%"></div>
 </div>
 
 </div>
 </section>
 
-<section id="future" class="reveal">
-<h2 class="section-title">Future Plans Together 🌌</h2>
-<div class="grid">
+<section id="future" class="reveal" style="position:relative;overflow:hidden;">
+<div style="position:absolute;inset:0;background:radial-gradient(circle at top,rgba(139,92,246,0.16),transparent 65%);"></div>
+<h2 class="section-title" style="text-shadow:0 0 35px rgba(255,77,148,0.35);">Future Plans 🌌</h2>
 
-<div class="card">
-<h3>🏠 Dream Home</h3>
-<p>
-Nuvvu naaku home feeling.
-One peaceful house, midnight talks, happy life together ❤️
-</p>
+<div class="future-grid">
+
+<div class="future-card">
+<div class="future-orb"></div>
+<div class="future-content">
+<div class="future-icon">🏠</div>
+<h3 class="future-title">Dream Home</h3>
+<p class="future-text">Peaceful life together with mini mommy ❤️</p>
+</div>
 </div>
 
-<div class="card">
-<h3>🛕 Arunachalam Again</h3>
-<p>
-Again Arunachalam ke kalisi povali ❤️<br>
-Job vachaka… settle ayyaka…<br>
-marriage tarvatha same temple lo malli memories create cheyyali ✨
-</p>
+<div class="future-card">
+<div class="future-orb"></div>
+<div class="future-content">
+<div class="future-icon">🛕</div>
+<h3 class="future-title">Arunachalam Again</h3>
+<p class="future-text">Job vachaka malli kalisi trips povali ❤️</p>
+</div>
 </div>
 
-<div class="card">
-<h3>🌊 Pondi Forever</h3>
-<p>
-Future lo Pondicherry velthey same room kavali.
-Same memories… new chapter ❤️
-</p>
+<div class="future-card">
+<div class="future-orb"></div>
+<div class="future-content">
+<div class="future-icon">🌊</div>
+<h3 class="future-title">Pondi Forever</h3>
+<p class="future-text">Same room same memories ❤️</p>
+</div>
 </div>
 
-<div class="card">
-<h3>💍 Marriage Dreams</h3>
-<p>
-Girlfriend kaadhu mommy…
-nuvvu naa life partner journey lo first step ❤️
-</p>
+<div class="future-card">
+<div class="future-orb"></div>
+<div class="future-content">
+<div class="future-icon">💍</div>
+<h3 class="future-title">Marriage Dreams</h3>
+<p class="future-text">2B • 1SOL forever ❤️</p>
+</div>
 </div>
 
-<div class="card">
-<h3>✈️ Future Trips</h3>
-<p>
-More beaches, more rides, more hugs,
-more forever memories together ✨
-</p>
+<div class="future-card">
+<div class="future-orb"></div>
+<div class="future-content">
+<div class="future-icon">🚀</div>
+<h3 class="future-title">Business Startup</h3>
+<p class="future-text">Kalisi oka successful business build cheddam ❤️</p>
+</div>
 </div>
 
-<div class="card">
-<h3>🌠 Forever Promise</h3>
-<p>
-Nimishaniki okasari I love you cheppadaniki kaadhu…
-life long aa maata meeda nilabadataniki ❤️
-</p>
+<div class="future-card">
+<div class="future-orb"></div>
+<div class="future-content">
+<div class="future-icon">✈️</div>
+<h3 class="future-title">Future Trips</h3>
+<p class="future-text">Kalisi world explore cheddam ❤️ Arunachalam, Pondi and many more memories ✨</p>
+</div>
+</div>
+
+<div class="future-card">
+<div class="future-orb"></div>
+<div class="future-content">
+<div class="future-icon">🎬</div>
+<h3 class="future-title">Movie Nights</h3>
+<p class="future-text">Late night movies, cuddles, popcorn and endless talks together ❤️</p>
+</div>
 </div>
 
 </div>
@@ -1016,215 +874,164 @@ life long aa maata meeda nilabadataniki ❤️
 
 <section class="reveal">
 <h2 class="section-title">Reasons I Love You ❤️</h2>
-<div class="grid">
-<div class="flip-card">
-<div class="flip-inner">
-<div class="flip-front">Your Care 🤍</div>
-<div class="flip-back">Nannu nakanna ekkuva choosukuntav.</div>
-</div>
-</div>
-<div class="flip-card">
-<div class="flip-inner">
-<div class="flip-front">Your Patience ✨</div>
-<div class="flip-back">Every worst day lo kuda pakkane unnav.</div>
-</div>
-</div>
-<div class="flip-card">
-<div class="flip-inner">
-<div class="flip-front">Your Love 💖</div>
-<div class="flip-back">Nuvvu na home feeling.</div>
-</div>
+<div class="love-reasons">
+<div class="reason-card">
+<div class="reason-icon">♾️</div>
+<h3 class="reason-title">2B • 1SOL</h3>
+<p class="reason-text">Because we are 2 bodies with 1 soul ✨</p>
 </div>
 </div>
 </section>
 
-<section class="reveal">
-<h2 class="section-title">Birthday Surprise 🎁</h2>
-<div class="card" style="text-align:center;">
-<button class="start-btn" onclick="showSurprise()">Open Surprise ❤️</button>
-<div id="surpriseBox" style="display:none;margin-top:30px;font-size:1.2rem;line-height:2;">
-Forever with you mommy ❤️<br>
-Mana story never ends.
-</div>
+<section class="reveal" id="letter">
+<h2 class="section-title" style="font-family:'Great Vibes',cursive;font-size:clamp(3rem,8vw,5rem);text-shadow:0 0 25px rgba(255,77,148,0.45);">Forever Letter ❤️</h2>
+
+<div style="max-width:850px;margin:auto;background:rgba(0,0,0,0.72);border:1px solid rgba(255,77,148,0.18);border-radius:40px;padding:50px 35px;box-shadow:0 0 60px rgba(255,0,128,0.22);backdrop-filter:blur(20px);position:relative;overflow:hidden;">
+<div style="position:absolute;inset:0;background:radial-gradient(circle at top,rgba(255,77,148,0.10),transparent 60%);"></div>
+<p style="position:relative;z-index:2;font-size:clamp(1.15rem,3vw,1.7rem);line-height:2.1;text-align:center;font-weight:600;color:#fff0f6;">
+Nuvvu naaku oka person kaadu mommy… ❤️<br><br>
+Nuvvu na peace, na happiness, na safe place.
+Happy moments lo navvadaniki kaadu,
+badhalu unna appudu pakkana undadaniki nuvvu kavali ✨<br><br>
+Mana story perfect kaakapovachu,
+kani mana feelings real.
+Ee website oka gift kaadu…
+idi mana memories,
+mana promises,
+mana forever journey ♾️
+</p>
 </div>
 </section>
 
 <footer>
-<div class="stars"></div>
 <h2 class="section-title">Forever With You ❤️</h2>
-<p>
-Under stars, through every worst day and every happiest memory…
-I will always choose you.
-</p>
+<p>I will always choose you ✨</p>
 </footer>
+
+<div class="image-viewer" id="imageViewer">
+<span class="close-viewer" onclick="closeViewer()">✕</span>
+<img id="viewerImage" src="" alt="Preview">
+</div>
 
 <script>
 const song = document.getElementById('loveSong');
 const musicBtn = document.getElementById('musicBtn');
 let playing = false;
 
-async function toggleMusic(){
-try{
-if(!playing){
-song.volume = 0.35;
-await song.play();
-musicBtn.innerHTML='⏸';
-playing = true;
-}else{
-song.pause();
-musicBtn.innerHTML='🎵';
-playing = false;
-}
-}catch(err){
-console.log(err);
-}
-}
-
-musicBtn.addEventListener('click',toggleMusic);
-
-document.addEventListener('click',()=>{
-if(!playing){
-toggleMusic();
-}
-},{once:true});
+musicBtn.addEventListener('click', async () => {
+  try {
+    if (!playing) {
+      song.volume = 0.35;
+      await song.play();
+      musicBtn.textContent = '⏸';
+      playing = true;
+    } else {
+      song.pause();
+      musicBtn.textContent = '🎵';
+      playing = false;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 const revealItems = document.querySelectorAll('.reveal');
-function reveal(){
-revealItems.forEach(el=>{
-const top = el.getBoundingClientRect().top;
-if(top < window.innerHeight - 100){
-el.classList.add('active');
+function revealSections() {
+  revealItems.forEach((item) => {
+    const top = item.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      item.classList.add('active');
+    }
+  });
 }
-});
+window.addEventListener('scroll', revealSections);
+revealSections();
+
+const targetDate = new Date('2026-05-17T00:00:00').getTime();
+setInterval(() => {
+  const now = Date.now();
+  const gap = targetDate - now;
+
+  const days = Math.floor(gap / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((gap % (1000 * 60)) / 1000);
+
+  document.getElementById('days').textContent = days;
+  document.getElementById('hours').textContent = hours;
+  document.getElementById('minutes').textContent = minutes;
+  document.getElementById('seconds').textContent = seconds;
+}, 1000);
+
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
-window.addEventListener('scroll',reveal);
-reveal();
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
-function showSurprise(){
-const box = document.getElementById('surpriseBox');
-box.style.display='block';
-for(let i=0;i<60;i++){
-const heart = document.createElement('div');
-heart.innerHTML='💖';
-heart.style.position='fixed';
-heart.style.left=Math.random()*100+'vw';
-heart.style.top='100vh';
-heart.style.fontSize='30px';
-heart.style.zIndex='9999';
-heart.style.transition='4s linear';
-document.body.appendChild(heart);
-setTimeout(()=>{
-heart.style.top='-10vh';
-heart.style.opacity='0';
-},100);
-setTimeout(()=>heart.remove(),4500);
-}
-}
-
-const quotes=[
-'You are my favorite chapter ❤️',
-'Mana story forever cinematic ✨',
-'Nuvvu na medicine… neku nenu addiction 💖',
-'You became my home feeling ❤️',
-'2026 mana future foundation ✨',
-'Every worst day tarvatha malli okati ayyam ❤️',
-'Forever with you mommy 🌙'
-];
-let q=0;
-setInterval(()=>{
-document.getElementById('quoteSlider').innerHTML=quotes[q];
-q=(q+1)%quotes.length;
-},3000);
-
-const targetDate = new Date('May 17, 2026 00:00:00').getTime();
-setInterval(()=>{
-const now = new Date().getTime();
-const gap = targetDate-now;
-const d=Math.floor(gap/(1000*60*60*24));
-const h=Math.floor((gap%(1000*60*60*24))/(1000*60*60));
-const m=Math.floor((gap%(1000*60*60))/(1000*60));
-const s=Math.floor((gap%(1000*60))/1000);
-
-document.getElementById('days').innerText=d;
-document.getElementById('hours').innerText=h;
-document.getElementById('minutes').innerText=m;
-document.getElementById('seconds').innerText=s;
-},1000);
-
-const canvas=document.getElementById('bgCanvas');
-const ctx=canvas.getContext('2d');
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-const particles=[];
-for(let i=0;i<120;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-r:Math.random()*3+1,
-dx:(Math.random()-0.5)*0.5,
-dy:(Math.random()-0.5)*0.5
-});
+const particles = [];
+for (let i = 0; i < 100; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 3 + 1,
+    dx: (Math.random() - 0.5) * 0.4,
+    dy: (Math.random() - 0.5) * 0.4
+  });
 }
 
-function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-particles.forEach(p=>{
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-ctx.fillStyle='rgba(255,105,180,0.7)';
-ctx.fill();
-p.x+=p.dx;
-p.y+=p.dy;
-if(p.x<0||p.x>canvas.width)p.dx*=-1;
-if(p.y<0||p.y>canvas.height)p.dy*=-1;
-});
-requestAnimationFrame(animate);
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach((particle) => {
+    ctx.beginPath();
+    ctx.arc(particle.x, particle.y, particle.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255,105,180,0.7)';
+    ctx.fill();
+
+    particle.x += particle.dx;
+    particle.y += particle.dy;
+
+    if (particle.x < 0 || particle.x > canvas.width) particle.dx *= -1;
+    if (particle.y < 0 || particle.y > canvas.height) particle.dy *= -1;
+  });
+
+  requestAnimationFrame(animateParticles);
 }
-animate();
+animateParticles();
 
-window.addEventListener('resize',()=>{
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-});
-
-function openViewer(src){
-document.getElementById('viewerImage').src = src;
-document.getElementById('imageViewer').style.display = 'flex';
-document.body.style.overflow = 'hidden';
+function openViewer(src) {
+  document.getElementById('viewerImage').src = src;
+  document.getElementById('imageViewer').style.display = 'flex';
 }
 
-function closeViewer(){
-document.getElementById('imageViewer').style.display = 'none';
-document.body.style.overflow = 'auto';
+function closeViewer() {
+  document.getElementById('imageViewer').style.display = 'none';
 }
 
+const butterflyIcons = ['🦋', '💖', '✨'];
 
+document.addEventListener('click', (event) => {
+  for (let i = 0; i < 10; i++) {
+    const butterfly = document.createElement('div');
+    butterfly.className = 'butterfly';
+    butterfly.textContent = butterflyIcons[Math.floor(Math.random() * butterflyIcons.length)];
 
-const butterflyEmojis=['🦋','💖','✨'];
+    butterfly.style.left = event.clientX + 'px';
+    butterfly.style.top = event.clientY + 'px';
+    butterfly.style.setProperty('--x', (Math.random() - 0.5) * 400 + 'px');
+    butterfly.style.setProperty('--y', Math.random() * -500 + 'px');
 
-document.addEventListener('click',(e)=>{
-for(let i=0;i<12;i++){
-const butterfly=document.createElement('div');
-butterfly.className='butterfly';
-butterfly.innerHTML=butterflyEmojis[Math.floor(Math.random()*butterflyEmojis.length)];
+    document.body.appendChild(butterfly);
 
-const randomX=(Math.random()-0.5)*400+'px';
-const randomY=(Math.random()*-500)+'px';
-
-butterfly.style.left=e.clientX+'px';
-butterfly.style.top=e.clientY+'px';
-butterfly.style.setProperty('--x',randomX);
-butterfly.style.setProperty('--y',randomY);
-
-butterfly.style.animationDuration=(2+Math.random()*2)+'s';
-
-document.body.appendChild(butterfly);
-
-setTimeout(()=>{
-butterfly.remove();
-},4000);
-}
+    setTimeout(() => {
+      butterfly.remove();
+    }, 3000);
+  }
 });
 </script>
 </body>
